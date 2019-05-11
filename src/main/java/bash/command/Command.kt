@@ -8,7 +8,7 @@ abstract class Command {
     var command: String
     var waitFor = true
     var merge = false
-    var input: InputStream? = null
+    var input: InputStream? = null    // InputStream too since we redirect by doing input = output
     var output: InputStream? = null
     var error: InputStream? = null
     var workingDir: File = STD.root
@@ -22,7 +22,7 @@ abstract class Command {
         this.input = input
     }
 
-    open fun launch() {
+    open fun launch() {     // can be overridden so we can mess with execution
         preExecute()
         execute()
         postExecute()

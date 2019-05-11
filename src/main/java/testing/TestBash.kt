@@ -5,7 +5,12 @@ import bash.grammar.Lexer
 import bash.grammar.Parser
 
 fun main() {
-    testLexer()
+    val word = "{a a,v,b}"
+    val word1 = "{a..b..2}"
+    val pattern = """.*\{.*\}.*""".toRegex(RegexOption.DOT_MATCHES_ALL)
+    val pattern1 = """.*\{.*\.\..*\}.*""".toRegex(RegexOption.DOT_MATCHES_ALL)
+    println(word.matches(pattern1) || word.matches(pattern))
+//    testLexer()
 }
 
 fun testLexer() {
@@ -22,7 +27,7 @@ fun testLexer() {
                 "else\n" +
                 "    echo \"Not OK\"\n" +
                 "fi",
-        "echo \$var \${ls -l} \${{1+2*exp(1)}} < somewhere; other --param > output < input")
+        "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")
     val str = text[7]
     val lexer = Lexer(str)
     println(str)

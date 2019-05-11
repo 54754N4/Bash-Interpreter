@@ -8,10 +8,9 @@ class SpitShit: CustomCommand {
     constructor(input: InputStream): super("SpitShit", input)
 
     override fun execute() {
-        out.appendln("My Output = ")
         for (i in 0..10) {
-            out.appendln("line $i")
-            err.appendln("line $i")
+            out.appendln("output line $i")
+            err.appendln("error line $i")
         }
     }
 }

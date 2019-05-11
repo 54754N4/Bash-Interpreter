@@ -4,7 +4,7 @@ val variables = hashMapOf("var" to "I love you baby")
 var historyExpand = true
 val history = arrayListOf<String>()
 
-fun variableExpansion(input:String):String {
+fun variableExpansion(input: String): String {
     var string = input
     for (variable in variables)
         if (string.contains(variable.key))
@@ -12,10 +12,14 @@ fun variableExpansion(input:String):String {
     return string
 }
 
-fun historyExpansion(input:String):String {
+fun historyExpansion(input: String): String {
     if (!historyExpand)
         return input
     // TODO history expand somehow, read docs ===================================================
     return input
 }
 
+fun braceExpand(input: String): String {
+    return ""
+    // TODO still
+}

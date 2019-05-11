@@ -12,22 +12,29 @@ class Bridge() {
             pin.write(input)
     }
 }
-class StreamTransfer(private val from: InputStream, private val to: OutputStream):Thread() {
-    init { startAndWait() }
 
+class StreamTransfer(private val from: InputStream, private val to: OutputStream):Thread() {
     override fun run() = to.bufferedWriter().use {
-            writer -> from.bufferedReader().readLines().forEach { line -> writer.appendln(line).also { println("transferred $line") } }
+        writer -> from.bufferedReader().readLines().forEach { line -> writer.appendln(line).also { println("transferred $line") } }
     }
 }
+
+// Extensions
+
 fun Thread.startAndWait() = start().also { join() }
-fun InputStream.readOutputTo(file: File) = StreamTransfer(this, file.outputStream())
-fun InputStream.readOutputTo(outputStream: OutputStream) = StreamTransfer(this, outputStream)
-fun OutputStream.writeInputFrom(file: File) = StreamTransfer(file.inputStream(), this)
-fun OutputStream.writeInputFrom(inputStream: InputStream) = StreamTransfer(inputStream, this)
-fun String.toLines(): List<String> = split("\r\n")   // on linux remove \r I think
+
+fun String.toLines(): List<String> = split("\r\n")   // on linux remove CR I think
+
 fun String.writeToPipe(): PipedInputStream = Bridge(this).pout
+
 fun StringBuilder.toLines(): List<String> = toString().toLines()
+
 fun StringBuilder.writeToPipe(): PipedInputStream = toString().writeToPipe()
+
+fun InputStream.readOutputTo(file: File) = StreamTransfer(this, file.outputStream()).startAndWait()
+
+fun InputStream.readOutputTo(outputStream: OutputStream) = StreamTransfer(this, outputStream).startAndWait()
+
 fun InputStream.mergeWith(with: InputStream): InputStream {
     val bridge = Bridge()
     thread {
@@ -39,6 +46,7 @@ fun InputStream.mergeWith(with: InputStream): InputStream {
     }.join()
     return bridge.pout
 }
+
 fun InputStream?.readAsString(): String {
     if (this == null)
         return ""
@@ -47,6 +55,11 @@ fun InputStream?.readAsString(): String {
         thread { this.bufferedReader().readLines().forEach { result.appendln(it) } }.join()
     return result.toString()
 }
+
+fun OutputStream.writeInputFrom(file: File) = StreamTransfer(file.inputStream(), this).startAndWait()
+
+fun OutputStream.writeInputFrom(inputStream: InputStream) = StreamTransfer(inputStream, this).startAndWait()
+
 fun OutputStream.write(input: String) = thread {
     this.bufferedWriter().use {
         it.write(input)

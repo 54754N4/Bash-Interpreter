@@ -44,20 +44,29 @@ class Lexer(private val text: String) {
             advance()
     }
 
-    private fun word(): String {
+    private fun word(): Token {
         val result = StringBuilder()
-        while ((currentChar.isLetter()
-            || currentChar.isDigit()
-            || currentChar == '_'
-            || currentChar == '['
-            || currentChar == ']'
-            || currentChar == '.'
-            || currentChar == '-')
-            && !finished) {
+        val valids = arrayOf('_','[',']','.','-','{','}')
+        var wait = false
+        while (!finished && (wait ||
+                (currentChar.isLetter()
+                || currentChar.isDigit()
+                || currentChar in valids))) {
+            if (currentChar == '{' && unescaped())
+                wait = true
+            if (currentChar == '}' && unescaped())
+                wait = false
             result.append(currentChar)
             advance()
         }
-        return result.toString()
+        return appropriateToken(result.toString())
+    }
+
+    private fun appropriateToken(word: String): Token {
+        return when {
+            word.contains("\\.\\.") || word.contains(".*\\{.*\\}") -> Token(Type.BRACE_EXPANSION, word)
+            else -> Token(Type.WORD, word)
+        }
     }
 
     private fun quoted(by: Char): String {
@@ -116,10 +125,10 @@ class Lexer(private val text: String) {
     }
 
     private fun id(): Token {
-        val result = word()
-        if (reserved.containsKey(result))
-            return Token(reserved[result]!!, result)
-        return Token(Type.WORD, result)
+        val token = word()
+        if (reserved.containsKey(token.value))
+            return Token(reserved[token.value]!!, token.value)
+        return token
     }
 
     private fun conditionCommand(): Token {
@@ -137,7 +146,10 @@ class Lexer(private val text: String) {
         testChar@while (!finished) {
             return when {
                 currentChar.isDigit() -> Token(Type.NUMBER, number())
-                currentChar.isLetter() || currentChar == '_' || currentChar == '-' -> id()
+                currentChar.isLetter()
+                    || currentChar == '{'
+                    || currentChar == '_'
+                    || currentChar == '-' -> id()
                 else -> {
                     when (currentChar) {
                         '"' -> Token(Type.WORD, quoted(currentChar))    // QUOTED_WORD

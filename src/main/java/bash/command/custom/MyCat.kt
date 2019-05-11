@@ -8,8 +8,6 @@ class MyCat: CustomCommand {
     constructor(input: InputStream?): super("MyCat", input)
 
     override fun execute() {
-        out.appendln("MyCat Input = ")
-        var i = 0
-        for (line in inputLines) out.appendln("${i++} $line")
+        for (line in inputLines) out.appendln(line)
     }
 }
