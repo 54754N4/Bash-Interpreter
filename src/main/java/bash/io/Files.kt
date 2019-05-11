@@ -6,7 +6,7 @@ fun File.printAll() = forEachLine { println(it) }
 
 class STD {
     companion object {
-        private const val stdPath = "IO/std%s"
+        private const val stdPath = "io/std%s"
         val input = File(stdPath.format("in"))
         val output = File(stdPath.format("out"))
         val error = File(stdPath.format("err"))
@@ -22,7 +22,7 @@ class STD {
 
 class FDManager {
     companion object {
-        private const val FD_PATH_FORMAT = "IO/fd%d"
+        private const val FD_PATH_FORMAT = "io/fd%d"
         private const val FD_MAX = 100
         val fds = mutableMapOf<Int, File>()
         init {
