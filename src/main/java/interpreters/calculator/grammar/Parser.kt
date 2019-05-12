@@ -25,9 +25,7 @@ class Parser(private val lexer: Lexer) {
     private var currentToken: Token = lexer.getNextToken()
 
     fun errorMessage() = lexer.errorMessage()
-    private fun error(): Token = throw SyntaxException(
-        "Invalid Syntax @ ${lexer.errorMessage()}"
-    )
+    private fun error(): Token = throw SyntaxException("Invalid Syntax @ ${lexer.errorMessage()}")
     private fun errorAST(): AST = throw SyntaxException("Invalid Syntax @ ${lexer.errorMessage()}")
 
     private fun consume(type: Type): Any = if (currentToken.type == type) currentToken = lexer.getNextToken() else error()

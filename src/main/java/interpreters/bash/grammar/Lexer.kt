@@ -1,17 +1,11 @@
 package interpreters.bash.grammar
 
+import command.*
 import interpreters.bash.exception.ParsingException
-import command.history
-import command.historyExpansion
-import command.reserved
-import command.variableExpansion
 
 /**
- * Bash does alias/history/arithmetic expansion and recognizes process substitution during
+ * Bash does alias/history/arithmetic/brace expansion and recognizes process substitution during
  * lexing i think based on the docs.
- * So let's just try and recreate that functionality using the Type.EXPANSION token, that's
- * only used by the lexer and not the parser cause every expansion will later on be treated
- * as a Type.WORD in the parser.
  */
 class Lexer(private val text: String) {
     private var condition = false
@@ -60,10 +54,8 @@ class Lexer(private val text: String) {
 
     private fun appropriateToken(word: String): Token {
         return when {
-            word.contains("\\.\\.") || word.contains(".*\\{.*\\}") -> Token(
-                Type.BRACE_EXPANSION,
-                word
-            )
+            word.contains("\\.\\.")
+            || word.contains(".*\\{.*\\}") -> Token(Type.WORD, braceExpansion(word))
             else -> Token(Type.WORD, word)
         }
     }
@@ -83,16 +75,20 @@ class Lexer(private val text: String) {
         val result = StringBuilder()
         val stop: String
         advance()              // skip expansion char
-        if (currentChar == '{') {
-            if (peek("{{")) {
-                stop = "}}"
+        when (currentChar) {
+            '{' -> {
+                if (peek("{{")) {
+                    stop = "}}"
+                    advance()
+                } else stop = "}"
                 advance()
-            } else stop = "}"
-            advance()
-        } else if (currentChar == '(') {
-            advance()
-            stop = ")"
-        } else stop = " "
+            }
+            '(' -> {
+                advance()
+                stop = ")"
+            }
+            else -> stop = " "
+        }
         while (!finished && !peek(stop)) {
             result.append(currentChar)
             advance()

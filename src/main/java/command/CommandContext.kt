@@ -1,7 +1,9 @@
 package command
 
 import interpreters.bash.grammar.Type
-import interpreters.brace.BraceExpansion
+import interpreters.brace.grammar.Interpreter
+import interpreters.brace.grammar.Lexer
+import interpreters.brace.grammar.Parser
 
 val reserved = hashMapOf(
     "if" to Type.IF, "then" to Type.THEN, "else" to Type.ELSE, "elif" to Type.ELIF,
@@ -14,12 +16,7 @@ val variables = hashMapOf("var" to "I love you baby")
 var historyExpand = true
 val history = arrayListOf<String>()
 
-fun main(){ //test nested !
-    val text = "a{b,c,d}e"
-    val text1 = "a{a..z}z"
-    val text2 = "a{a..z..2}z"
-    println(braceExpand(text1))
-}
+fun braceExpansion(input: String) = Interpreter(Parser(Lexer(input))).interpret()
 
 fun variableExpansion(input: String): String {
     var string = input
@@ -34,8 +31,4 @@ fun historyExpansion(input: String): String {
         return input
     // TODO history expand somehow, read docs ===================================================
     return input
-}
-
-fun braceExpand(input: String): String {
-    return BraceExpansion(input).expand()
 }
