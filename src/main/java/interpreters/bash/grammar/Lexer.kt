@@ -4,8 +4,9 @@ import command.*
 import interpreters.bash.exception.ParsingException
 
 /**
- * Bash does alias/history/arithmetic/brace expansion and recognizes process substitution during
+ * Bash does alias/history/arithmetic/brace expansions and recognizes process substitutions during
  * lexing i think based on the docs.
+ * Not done : parameter/substring expansions
  */
 class Lexer(private val text: String) {
     private var condition = false
