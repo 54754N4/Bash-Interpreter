@@ -1,8 +1,8 @@
 package testing
 
-import bash.ast.Compound
-import bash.grammar.Lexer
-import bash.grammar.Parser
+import interpreters.bash.ast.Compound
+import interpreters.bash.grammar.Lexer
+import interpreters.bash.grammar.Parser
 
 fun main() {
     val word = "{a a,v,b}"

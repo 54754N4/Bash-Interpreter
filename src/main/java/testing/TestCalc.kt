@@ -1,8 +1,8 @@
 package testing
 
-import calculator.grammar.Interpreter
-import calculator.grammar.Lexer
-import calculator.grammar.Parser
+import interpreters.calculator.grammar.Interpreter
+import interpreters.calculator.grammar.Lexer
+import interpreters.calculator.grammar.Parser
 
 fun main() {
     while (true) {

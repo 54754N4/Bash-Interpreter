@@ -1,13 +1,13 @@
 package testing
 
-import bash.command.*
-import bash.command.custom.MyCat
-import bash.command.custom.SpitShit
-import bash.io.*
+import command.custom.MyCat
+import command.custom.SpitShit
+import command.NativeCommand
+import io.*
 import java.io.File
 
 fun main() {
-    testPipe()
+    testCustomInPipe()
 }
 
 fun testCustomIOPipe() {
@@ -36,7 +36,7 @@ fun testInput() {
 }
 
 fun testCustomInPipe() {
-    val dir = NativeCommand("dir /b")
+    val dir = NativeCommand("dir")
     dir.launch()
     val cat = MyCat(dir.output)
     cat.launch()
