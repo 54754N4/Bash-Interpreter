@@ -20,7 +20,7 @@ class Lexer(private val text: String) {
 
     private fun advance() {
         try { currentChar = text[++pos] }
-        catch (e: StringIndexOutOfBoundsException) { finished = true }  // "gracefully" finish parsing
+        catch (e: IndexOutOfBoundsException) { finished = true }  // "gracefully" finish parsing
     }
 
     private fun peek(string: String):Boolean = text.substring(pos).startsWith(string)
@@ -103,16 +103,10 @@ class Lexer(private val text: String) {
         }
         val string = historyExpansion(result.toString())   // do hist. exp. on cmd. sub. + ari. exp. ?
         return when (stop) {
-            " " -> Token(
-                Type.WORD,
-                variableExpansion(result.toString())
-            )
-            ")" -> Token(
-                Type.PROCESS_SUBSTITUTION,
-                result.toString()
-            )
+            " " -> Token(Type.WORD, variableExpansion(result.toString()))
+            ")" -> Token(Type.PROCESS_SUBSTITUTION, result.toString())
             "}" -> Token(Type.COMMAND_SUBSTITUTION, string)
-            "}}" -> Token(Type.ARITHMETIC_EXPANSION, string)
+            "}}" -> Token(Type.WORD, arithmeticExpansion(string))
             else -> error()
         }
     }

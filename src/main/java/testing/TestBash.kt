@@ -3,16 +3,20 @@ package testing
 import interpreters.bash.ast.Compound
 import interpreters.bash.grammar.Lexer
 import interpreters.bash.grammar.Parser
+import interpreters.brace.grammar.Type
 
 fun main() {
-    val word = "{a a,v,b}"
-    val word1 = "{a..b..2}"
-    val pattern = """.*\{.*\}.*""".toRegex(RegexOption.DOT_MATCHES_ALL)
-    val pattern1 = """.*\{.*\.\..*\}.*""".toRegex(RegexOption.DOT_MATCHES_ALL)
-    println(word.matches(pattern1) || word.matches(pattern))
-//    testLexer()
+    testBrace()
+    //testLexer()
 }
-
+fun testBrace() {
+    val text = "abc{d,e,f,g}hijk"
+    val text2 = "abc{1..2}asdf32-w=)"
+    val text3 = "{a..z}"
+    val lexer = interpreters.brace.grammar.Lexer(text2)
+    println(lexer.getTokens())
+    println(interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(text2))).interpret())
+}
 fun testLexer() {
     val text = listOf(
         "who",

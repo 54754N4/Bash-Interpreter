@@ -37,10 +37,16 @@ class Parser(private val lexer: Lexer) {
         val backtrackTo = current
         try {
             val start = currentToken()
-            consume(Type.CHAR)
+            when (currentToken().type) {
+                Type.CHAR, Type.NUMBER -> consume(currentToken().type)
+                else -> error()
+            }
             consume(Type.RANGE)
             val end = currentToken()
-            consume(Type.CHAR)
+            when (currentToken().type) {
+                Type.CHAR, Type.NUMBER -> consume(currentToken().type)
+                else -> error()
+            }
             var inc: Token? = null
             if (currentToken().type == Type.RANGE) {
                 consume(Type.RANGE)

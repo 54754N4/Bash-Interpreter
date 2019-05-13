@@ -2,20 +2,6 @@ package interpreters.brace.grammar
 
 import interpreters.brace.exception.InvalidBraceExpansionException
 
-fun main() {
-    val text = "abc{d,e,f,g}hijk"
-    val text2 = "abc{1..2}asdf32-w=)"
-    val text3 = "a{a..z}z"
-    val lexer = Lexer(text2)
-    lexer.getTokens()
-    var token = lexer.getNextToken()
-    while (token.type != Type.EOF) {
-        println(token)
-        token = lexer.getNextToken()
-    }
-    println(token)
-}
-
 class Lexer(private val text: String) {
     private var pos: Int = 0
     private var line: Int = 0
@@ -35,6 +21,7 @@ class Lexer(private val text: String) {
             tokens.add(token)
             token = getNextToken()
         }
+        tokens.add(token)
         reset()
         return tokens
     }
