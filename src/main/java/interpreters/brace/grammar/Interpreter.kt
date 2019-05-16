@@ -17,10 +17,12 @@ class Interpreter(private val parser: Parser): Visitor {
     override fun visit(preamble: Token, expression: RangeExpression, postscript: Token): String {
         val result = StringBuilder()
         val range = generateRange(expression.start, expression.end, expression.inc)
-        if (range != null)
+        return if (range != null) {
             for (c in range)
                 result.append(preamble.value).append(c).append(postscript.value).append(" ")
-        return result.deleteCharAt(result.length-1).toString()
+            result.deleteCharAt(result.length-1).toString()
+        } else
+            preamble.value + Type.EXPR_START.string + expression.start.value + Type.RANGE.string + expression.end.value + Type.EXPR_END.string + postscript.value
     }
 
     override fun visit(preamble: Token, expression: CSVExpression, postscript: Token): String {
