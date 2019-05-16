@@ -3,15 +3,18 @@ package interpreters.brace.grammar
 import interpreters.brace.exception.InvalidBraceExpansionException
 
 class Lexer(private val text: String) {
+    private enum class State {PREAMBLE, EXPRESSION, POSTSCRIPT, FINISHED}
     private var pos: Int = 0
     private var line: Int = 0
     private var currentChar = text[0]
     private var finished = false
+    private var currentState = State.PREAMBLE
 
-    fun reset() {
+    private fun reset() {
         pos = 0
         currentChar = text[0]
         finished = false
+        currentState = State.PREAMBLE
     }
 
     fun getTokens(): ArrayList<Token> {
@@ -49,6 +52,26 @@ class Lexer(private val text: String) {
         return Token(Type.NUMBER, result.toString())
     }
 
+    private fun preamble(): Token {
+        val preamble = StringBuilder()
+        while (!finished && currentChar != '{') {
+            preamble.append(currentChar)
+            advance()
+        }
+        currentState = State.EXPRESSION
+        return Token(Type.WORD, preamble.toString())
+    }
+
+    private fun postscript(): Token {
+        val postscript = StringBuilder()
+        while (!finished) {
+            postscript.append(currentChar)
+            advance()
+        }
+        currentState = State.FINISHED
+        return Token(Type.WORD, postscript.toString())
+    }
+
     private fun word(): Token {
         val result = StringBuilder()
         val stops = arrayOf('}', '{', ',')
@@ -64,31 +87,35 @@ class Lexer(private val text: String) {
     }
 
     fun getNextToken(): Token {
-        while (!finished) {
-            return when {
-                currentChar.isDigit() -> number()
-                currentChar == ' ' || currentChar.isLetter() -> word()
-                currentChar == ',' -> {
-                    advance()
-                    Token(Type.COMMA)
+        return when (currentState) {
+            State.PREAMBLE -> preamble()
+            State.POSTSCRIPT -> postscript()
+            State.EXPRESSION -> {
+                when {
+                    currentChar.isDigit() -> number()
+                    peek("..") -> {
+                        advance()
+                        advance()
+                        Token(Type.RANGE)
+                    }
+                    currentChar == '{' -> {
+                        advance()
+                        Token(Type.EXPR_START)
+                    }
+                    currentChar == '}' -> {
+                        advance()
+                        currentState = State.POSTSCRIPT
+                        Token(Type.EXPR_END)
+                    }
+                    currentChar == ',' -> {
+                        advance()
+                        Token(Type.COMMA)
+                    }
+                    else -> word()
                 }
-                currentChar == '{' -> {
-                    advance()
-                    Token(Type.EXPR_START)
-                }
-                currentChar == '}' -> {
-                    advance()
-                    Token(Type.EXPR_END)
-                }
-                peek("..") -> {
-                    advance()
-                    advance()
-                    Token(Type.RANGE)
-                }
-                else -> error()
             }
+            State.FINISHED -> Token(Type.EOF)
         }
-        return Token(Type.EOF)
     }
 
     fun errorMessage():String = "[$line,$pos] Invalid syntax at : $currentChar"

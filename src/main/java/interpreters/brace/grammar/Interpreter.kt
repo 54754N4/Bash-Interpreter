@@ -2,6 +2,7 @@ package interpreters.brace.grammar
 
 import interpreters.brace.ast.*
 import interpreters.brace.exception.InvalidBraceExpansionException
+import interpreters.brace.lib.generateRange
 
 class Interpreter(private val parser: Parser): Visitor {
 
@@ -15,16 +16,10 @@ class Interpreter(private val parser: Parser): Visitor {
 
     override fun visit(preamble: Token, expression: RangeExpression, postscript: Token): String {
         val result = StringBuilder()
-        if (expression.inc != null) {
-            val increment = expression.inc.value.toInt()
-            val range = expression.start.value.toCharArray()[0].rangeTo(expression.end.value.toCharArray()[0]) step increment
+        val range = generateRange(expression.start, expression.end, expression.inc)
+        if (range != null)
             for (c in range)
                 result.append(preamble.value).append(c).append(postscript.value).append(" ")
-        }else {
-            val range = expression.start.value.toCharArray()[0]..expression.end.value.toCharArray()[0]
-            for (c in range)
-                result.append(preamble.value).append(c).append(postscript.value).append(" ")
-        }
         return result.deleteCharAt(result.length-1).toString()
     }
 

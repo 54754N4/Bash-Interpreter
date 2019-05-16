@@ -27,7 +27,7 @@ abstract class CustomCommand: Command, Runnable {
         out = StringBuilder()
         err = StringBuilder()
         thread = Thread(this)
-        inputLines = input?.readAsString()?.toLines() ?: listOf("")
+        inputLines = if (input == null) listOf("") else input.readAsString().toLines()
         exit = EXIT_SUCCESS
     }
 
