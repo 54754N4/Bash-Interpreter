@@ -10,7 +10,7 @@ fun main() {
     testCustomInPipe()
 }
 
-fun testCustomIOPipe() {
+private fun testCustomIOPipe() {
     val shit = SpitShit()
     shit.launch()
     val cat = MyCat(shit.output)
@@ -27,7 +27,7 @@ fun testCustomIOPipe() {
     println(cat3.error.readAsString())
 }
 
-fun testInput() {
+private fun testInput() {
     val file = File("test.txt")
     val dir = NativeCommand("type", file.inputStream()) // i wish windows had cat..
     dir.merge = true
@@ -35,7 +35,7 @@ fun testInput() {
     println(dir.output.readAsString())
 }
 
-fun testCustomInPipe() {
+private fun testCustomInPipe() {
     val dir = NativeCommand("dir")
     dir.launch()
     val cat = MyCat(dir.output)
@@ -46,7 +46,7 @@ fun testCustomInPipe() {
     println(cat.error.readAsString())
 }
 
-fun testPipe() {
+private fun testPipe() {
     val dir = NativeCommand("dir /b")
     dir.launch()
     val find = NativeCommand("find /I \"test\"", dir.output)
@@ -57,7 +57,7 @@ fun testPipe() {
     println(find.error.readAsString())
 }
 
-fun testBridges() {
+private fun testBridges() {
     val file = File("test.txt")
     val fOut = file.inputStream()
     val bridge = Bridge()
@@ -68,7 +68,7 @@ fun testBridges() {
     STD.output.printAll()
 }
 
-fun testBridge1() {
+private fun testBridge1() {
     val file = File("test.txt")
     val fOut = file.inputStream()
     val bridge = Bridge()
@@ -77,7 +77,7 @@ fun testBridge1() {
     STD.output.printAll()
 }
 
-fun testBridge0() {
+private fun testBridge0() {
     val file = File("test.txt")
     val fOut = file.inputStream()
     val bridge= Bridge()

@@ -3,7 +3,7 @@ package testing
 import kotlinx.coroutines.*
 import java.util.concurrent.atomic.AtomicInteger
 
-class Incrementor() {
+private class Incrementor() {
     val sharedCounter: AtomicInteger = AtomicInteger(0)
 
     fun updateCounterIfNecessary(shouldIActuallyIncrement: Boolean) {
