@@ -42,8 +42,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="351">
-              <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+            <state relative-caret-position="63">
+              <caret line="9" selection-start-line="9" selection-end-line="9" />
               <folding>
                 <element signature="e#32#152#0" expanded="true" />
               </folding>
@@ -369,7 +369,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.testing.TestBashKt">
+  <component name="RunManager" selected="Kotlin.interpreters.brace.lib.BraceHelperKt">
     <configuration name="command.CommandContextKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="Bash Interpreter" />
       <option name="VM_PARAMETERS" />
@@ -396,6 +396,19 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="interpreters.brace.lib.BraceHelperKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
+      <module name="Bash Interpreter" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="MAIN_CLASS_NAME" value="interpreters.brace.lib.BraceHelperKt" />
+      <option name="WORKING_DIRECTORY" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="testing.TestBashKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="Bash Interpreter" />
       <option name="VM_PARAMETERS" />
@@ -404,19 +417,6 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="PASS_PARENT_ENVS" value="true" />
       <option name="MAIN_CLASS_NAME" value="testing.TestBashKt" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="testing.TestBridgesKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
-      <module name="Bash Interpreter" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" value="testing.TestBridgesKt" />
       <option name="WORKING_DIRECTORY" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -437,11 +437,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Kotlin.interpreters.brace.lib.BraceHelperKt" />
         <item itemvalue="Kotlin.testing.TestBashKt" />
         <item itemvalue="Kotlin.command.CommandContextKt" />
         <item itemvalue="Kotlin.interpreters.brace.grammar.LexerKt" />
         <item itemvalue="Kotlin.testing.TestCalcKt" />
-        <item itemvalue="Kotlin.testing.TestBridgesKt" />
       </list>
     </recent_temporary>
   </component>
@@ -471,7 +471,7 @@
     <frame x="169" y="-7" width="1374" height="878" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.499002" visible="true" weight="0.2305936" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.499002" visible="true" weight="0.2305936" />
       <window_info id="Structure" order="1" sideWeight="0.500998" side_tool="true" weight="0.20319635" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -481,7 +481,7 @@
       <window_info id="Favorites" order="7" sideWeight="0.500998" side_tool="true" weight="0.20319635" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49619484" weight="0.3297587" />
-      <window_info anchor="bottom" x="368" y="333" width="1001" height="238" id="Run" order="2" sideWeight="0.4732143" weight="0.6689008" />
+      <window_info active="true" anchor="bottom" x="368" y="333" width="1001" height="238" id="Run" order="2" sideWeight="0.4732143" visible="true" weight="0.6689008" />
       <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4977169" weight="0.5670241" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -918,8 +918,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="351">
-          <caret line="38" column="1" selection-start-line="38" selection-start-column="1" selection-end-line="38" selection-end-column="1" />
+        <state relative-caret-position="63">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
           <folding>
             <element signature="e#32#152#0" expanded="true" />
           </folding>

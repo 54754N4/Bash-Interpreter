@@ -8,6 +8,7 @@ fun main() {
     println(generateIntRange("10", "0001", "2"))
     println(generateCharRange("z", "a", "1"))
     println(isZeroPadded("002"))
+//    println(isInt("1"))
 }
 
 fun generateRange(start: Token, end: Token, inc: Token?): List<String>? {
@@ -45,9 +46,6 @@ private fun isZeroPadded(string: String): Boolean {
 }
 
 private fun isInt(string: String): Boolean {
-    return try {
-        string.toInt()
-        true
-    }
+    return try { string.toInt() is Int }    // stupid warning
     catch (e: NumberFormatException) {false}
 }
