@@ -10,12 +10,13 @@ fun main() {
     //testLexer()
 }
 fun testBrace() {
-    val text = "abc{d,e,f,g}hijk"
+    val text = "{A..Z}{0..9}"
     val text2 = "{01..10}"
-    val text3 = "{a..z..10}"
+    val text3 = "{{A..Z},{a..z}}"
     val lexer = interpreters.brace.grammar.Lexer(text2)
-    println(lexer.getTokens())
+    //println(lexer.getTokens())
     println(interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(text))).interpret())
+    println(interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(text3))).interpret())
 }
 fun testLexer() {
     val text = listOf(

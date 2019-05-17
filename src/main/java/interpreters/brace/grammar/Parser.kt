@@ -3,6 +3,7 @@ package interpreters.brace.grammar
 import interpreters.brace.ast.*
 import interpreters.brace.exception.InvalidBraceExpansionException
 
+// input:           brace_expand*
 // brace_expand:    WORD? '{' expression '}' WORD?
 // expression:      [a-z]..[a-z][..[0-9]+] | atom (',' atom)+
 // atom:            brace_expand | WORD
