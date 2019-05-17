@@ -13,12 +13,13 @@ class Parser(private val lexer: Lexer) {
 
     fun errorMessage() = lexer.errorMessage()
     private fun error(): Token = throw InvalidBraceExpansionException("Brace Expansion Error @ ${lexer.errorMessage()}")
+    private fun errorAST(): AST = throw InvalidBraceExpansionException("Parsing @ ${lexer.errorMessage()}")
 
     private fun currentToken() = tokens[current]
     private fun consume(type: Type): Any = (if (currentToken().type == type) current++ else error())
 
     // atom: brace_expand | WORD
-    private fun atom(): Atom {
+    fun atom(): Atom {
         val backtrackTo = current
         return try {
             brace_expand()
@@ -32,7 +33,7 @@ class Parser(private val lexer: Lexer) {
     }
 
     // expression: [a-z] '..' [a-z] ['..' [0-9]+] | atom (',' atom)+
-    private fun expression(): Expression {
+    fun expression(): Expression {
         val backtrackTo = current
         try {
             val start = currentToken()
@@ -65,7 +66,7 @@ class Parser(private val lexer: Lexer) {
     }
 
     // brace_expand: WORD? '{' expression '}' WORD?
-    private fun brace_expand(): BraceExpansion {
+    fun brace_expand(): BraceExpansion {
         var preamble = Token(Type.EMPTY)
         var postscript = Token(Type.EMPTY)
         if (currentToken().type == Type.WORD
