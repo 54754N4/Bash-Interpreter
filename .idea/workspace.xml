@@ -21,8 +21,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+            <state relative-caret-position="154">
+              <caret line="32" selection-start-line="32" selection-end-line="32" />
+              <folding>
+                <element signature="e#17#213#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -30,8 +33,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="199">
-              <caret line="162" column="32" lean-forward="true" selection-start-line="162" selection-start-column="32" selection-end-line="162" selection-end-column="32" />
+            <state relative-caret-position="66">
+              <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
               <folding>
                 <element signature="e#35#103#0" expanded="true" />
               </folding>
@@ -39,23 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="63">
-              <caret line="9" selection-start-line="9" selection-end-line="9" />
-              <folding>
-                <element signature="e#32#152#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="240">
+              <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Type.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
+            <state relative-caret-position="157">
+              <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
             </state>
           </provider>
         </entry>
@@ -183,12 +183,12 @@
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Parser.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Parser.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/ast/AST.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Type.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/ast/Visitor.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Interpreter.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestBash.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Type.kt" />
       </list>
     </option>
   </component>
@@ -291,25 +291,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="interpreters" type="462c0819:PsiDirectoryNode" />
-              <item name="brace" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bash Interpreter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="interpreters" type="462c0819:PsiDirectoryNode" />
-              <item name="brace" type="462c0819:PsiDirectoryNode" />
-              <item name="lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
-              <item name="Bash Interpreter" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="testing" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -369,7 +350,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Kotlin.interpreters.brace.lib.BraceHelperKt">
+  <component name="RunManager" selected="Kotlin.testing.TestBashKt">
     <configuration name="command.CommandContextKt" type="JetRunConfigurationType" factoryName="Kotlin" temporary="true" nameIsGenerated="true">
       <module name="Bash Interpreter" />
       <option name="VM_PARAMETERS" />
@@ -437,8 +418,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Kotlin.interpreters.brace.lib.BraceHelperKt" />
         <item itemvalue="Kotlin.testing.TestBashKt" />
+        <item itemvalue="Kotlin.interpreters.brace.lib.BraceHelperKt" />
         <item itemvalue="Kotlin.command.CommandContextKt" />
         <item itemvalue="Kotlin.interpreters.brace.grammar.LexerKt" />
         <item itemvalue="Kotlin.testing.TestCalcKt" />
@@ -562,6 +543,12 @@
           <line>8</line>
           <properties />
           <option name="timeStamp" value="17" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="kotlin-line">
+          <url>file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt</url>
+          <line>146</line>
+          <properties />
+          <option name="timeStamp" value="19" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
@@ -744,13 +731,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/BraceExpansion.kt" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/command/Command.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="246">
@@ -851,13 +831,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Type.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="2" column="52" selection-start-line="2" selection-start-column="52" selection-end-line="2" selection-end-column="52" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/ast/Visitor.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="357">
@@ -899,30 +872,47 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1008">
+          <caret line="48" column="49" selection-start-line="48" selection-start-column="49" selection-end-line="48" selection-end-column="49" />
+          <folding>
+            <element signature="e#32#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="15" column="4" selection-start-line="15" selection-start-column="4" selection-end-line="15" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="7" column="12" lean-forward="true" selection-start-line="7" selection-start-column="12" selection-end-line="7" selection-end-column="12" />
+        <state relative-caret-position="154">
+          <caret line="32" selection-start-line="32" selection-end-line="32" />
+          <folding>
+            <element signature="e#17#213#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="199">
-          <caret line="162" column="32" lean-forward="true" selection-start-line="162" selection-start-column="32" selection-end-line="162" selection-end-column="32" />
+        <state relative-caret-position="66">
+          <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
           <folding>
             <element signature="e#35#103#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/lib/BraceHelper.kt">
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Type.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="9" selection-start-line="9" selection-end-line="9" />
-          <folding>
-            <element signature="e#32#152#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="157">
+          <caret line="18" column="6" selection-start-line="18" selection-start-column="6" selection-end-line="18" selection-end-column="6" />
         </state>
       </provider>
     </entry>

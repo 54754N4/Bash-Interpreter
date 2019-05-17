@@ -3,7 +3,7 @@ package testing
 import interpreters.bash.ast.Compound
 import interpreters.bash.grammar.Lexer
 import interpreters.bash.grammar.Parser
-import interpreters.brace.grammar.Type
+import interpreters.bash.grammar.Type
 
 fun main() {
     testLexer()
@@ -24,15 +24,15 @@ private fun testLexer() {
                 "    echo \"Not OK\"\n" +
                 "fi",
         "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")
-    val str = text[7]
+    val str = text[6]
     val lexer = Lexer(str)
     println(str)
-//    var token = lexer.getNextToken()
-//    while (token.type != Type.EOF) {
-//        println(token)
-//        token = lexer.getNextToken()
-//    }
-//    println(token)
+    var token = lexer.getNextToken()
+    while (Type.EOF != token.type) {
+        println(token)
+        token = lexer.getNextToken()
+    }
+    println(token)
     val parser = Parser(Lexer(str))
     debug(parser.parse())
 }

@@ -14,9 +14,8 @@ class Lexer(private val text: String) {
     private var line: Int = 0
     private var currentChar = text[0]
     private var finished = false
-    init {
-        history.add(text)   // every time we call the bash lexer we update the history
-    }
+
+    init { history.add(text) } // every time we call the bash lexer we update the history
 
     private fun advance() {
         try { currentChar = text[++pos] }
@@ -39,14 +38,10 @@ class Lexer(private val text: String) {
         val result = StringBuilder()
         val valids = arrayOf('_','[',']','.','-','{','}')
         var wait = false
-        while (!finished && (wait ||
-                (currentChar.isLetter()
-                || currentChar.isDigit()
-                || currentChar in valids))) {
-            if (currentChar == '{' && unescaped())
-                wait = true
-            if (currentChar == '}' && unescaped())
-                wait = false
+        while (!finished
+            && (wait || (currentChar.isLetter() || currentChar.isDigit() || currentChar in valids))) {
+            if (currentChar == '{' && unescaped()) wait = true
+            if (currentChar == '}' && unescaped()) wait = false
             result.append(currentChar)
             advance()
         }
@@ -61,7 +56,7 @@ class Lexer(private val text: String) {
         }
     }
 
-    private fun quoted(by: Char): String {
+    private fun quoted(by: Char): Token {
         val result = StringBuilder()
         advance()   //skip current quote
         while (currentChar != by && unescaped() && !finished) {
@@ -69,7 +64,18 @@ class Lexer(private val text: String) {
             advance()
         }
         advance()   //skip ending unescaped quote
-       return result.toString()
+       return Token(Type.WORD, result.toString())
+    }
+
+    private fun braceExpansion(): Token {
+        val result = StringBuilder()
+        advance()   // skip left curly brace
+        while (currentChar != '}' && unescaped() && !finished) {
+            result.append(currentChar)
+            advance()
+        }
+        advance()   // skip right curly brace
+        return Token(Type.WORD, braceExpansion(result.toString()))
     }
 
     private fun expansion(): Token {
@@ -129,10 +135,11 @@ class Lexer(private val text: String) {
 
     private fun conditionCommand(): Token {
         val result = StringBuilder()
-        while (currentChar != ']' && text[pos+1] != ']') {
+        while (currentChar != ']' && unescaped()) {
             result.append(currentChar)
             advance()
         }
+        condition = false
         return Token(Type.CONDITION_CMD, result.toString())
     }
 
@@ -151,11 +158,8 @@ class Lexer(private val text: String) {
                     || currentChar == '-' -> id()
                 else -> {
                     when (currentChar) {
-                        '"' -> Token(
-                            Type.WORD,
-                            quoted(currentChar)
-                        )    // QUOTED_WORD
-                        '$' ->  expansion()                              // EXPANSION
+                        '"' -> quoted(currentChar)
+                        '$' -> expansion()
                         '#' -> {
                             skipComment()
                             continue@testChar
@@ -163,6 +167,17 @@ class Lexer(private val text: String) {
                         ' ' -> {
                             advance()
                             continue@testChar
+                        }
+                        '{' -> {
+                            if (unescaped()) braceExpansion()
+                            else {
+                                advance()
+                                Token(Type.LEFT_CURLY_BRACE)
+                            }
+                        }
+                        '}' -> {
+                            advance()
+                            Token(Type.RIGHT_CURLY_BRACE)
                         }
                         '\n' -> {
                             advance()
@@ -172,17 +187,19 @@ class Lexer(private val text: String) {
                             advance()
                             Token(Type.BANG)
                         }
-                        '{' -> {
-                            advance()
-                            Token(Type.LEFT_CURLY_BRACE)
-                        }
-                        '}' -> {
-                            advance()
-                            Token(Type.RIGHT_CURLY_BRACE)
-                        }
                         '=' -> {
                             advance()
                             Token(Type.ASSIGNMENT)
+                        }
+                        ']' -> {
+                            advance()
+                            Token(Type.CONDITION_END)
+                        }
+                        '[' -> {
+                            if (unescaped())
+                                condition = true
+                            advance()
+                            Token(Type.CONDITION_START)
                         }
                         '-' -> {
                             advance()
@@ -194,26 +211,6 @@ class Lexer(private val text: String) {
                                 Token(Type.TIMEIGN)
                             }
                             Token(Type.DASH)
-                        }
-                        '[' -> {
-                            advance()
-                            if (currentChar == '[') {
-                                advance()
-                                condition = true
-                                Token(Type.CONDITION_START)
-                            }
-                            Token(Type.LEFT_SQUARE_BRACKET)
-                        }
-                        ']' -> {
-                            advance()
-                            if (currentChar == ']') {
-                                if (!condition)
-                                    error()
-                                condition = false
-                                advance()
-                                Token(Type.CONDITION_END)
-                            }
-                            Token(Type.RIGHT_SQUARE_BRACKET)
                         }
                         ';' -> {
                             advance()
