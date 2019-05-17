@@ -9,7 +9,7 @@ compound:           pipeline (';' pipeline)*
 pipeline:           simple_command ('|'|'&&'|'||'|'|&' simple_command)*
 simple_command:     word+ redirection*
 redirection:        NUMBER? ('<'|'<<'|'>'|'>>'|'<>') word
-word:	            COMMAND_SUB | ARITHMETIC_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
+word:	            COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
  */
 class Parser(private val lexer: Lexer) {
     companion object {
@@ -30,17 +30,13 @@ class Parser(private val lexer: Lexer) {
             error()
     }
 
-    //word: COMMAND_SUB | ARITHMETIC_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
+    //word: COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
     private fun word(): AST {
         val token = currentToken
         return when (token.type) {
             Type.COMMAND_SUBSTITUTION -> {
                 consume(Type.COMMAND_SUBSTITUTION)
                 CommandSub(token)
-            }
-            Type.ARITHMETIC_EXPANSION -> {
-                consume(Type.ARITHMETIC_EXPANSION)
-                ArithmeticSub(token)
             }
             Type.PROCESS_SUBSTITUTION -> {
                 consume(Type.PROCESS_SUBSTITUTION)

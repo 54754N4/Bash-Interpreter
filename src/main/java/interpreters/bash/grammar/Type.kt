@@ -1,5 +1,6 @@
 package interpreters.bash.grammar
 
+// i think i was overly optimistic when i wrote this..
 enum class Type(val string: String) {
     IF("IF"), THEN("THEN"), ELSE("ELSE"), ELIF("ELIF"), FI("FI"), CASE("CASE"), ESAC("ESAC"), FOR("FOR"), SELECT("SELECT"), WHILE("WHILE"), UNTIL("UNTIL"), DO("DO"), DONE("DONE"), FUNCTION("FUNCTION"), COPROC("COPROC"),
     CONDITION_START("[["), CONDITION_CMD("CONDITION_CMD"), CONDITION_END("]]"), CONDITION_ERROR("CONDITION_ERROR"), //error ? really ?

@@ -14,7 +14,7 @@ class Interpreter(private val parser: Parser): Visitor {
         return node.word.value
     }
 
-    override fun visit(preamble: Atom, expression: RangeExpression, postscript: Atom): String {
+    override fun visit(preamble: AST, expression: RangeExpression, postscript: AST): String {
         val result = StringBuilder()
         val range = generateRange(expression.start, expression.end, expression.inc)
         val preamble = visit(preamble)
@@ -29,7 +29,7 @@ class Interpreter(private val parser: Parser): Visitor {
             preamble + Type.EXPR_START.string + expression.start.value + Type.RANGE.string + expression.end.value + Type.EXPR_END.string + postscript
     }
 
-    override fun visit(preamble: Atom, expression: CSVExpression, postscript: Atom): String {
+    override fun visit(preamble: AST, expression: CSVExpression, postscript: AST): String {
         val result = StringBuilder()
         for (atom in expression.atoms)
             result.append(visit(preamble)).append(visit(atom)).append(visit(postscript)).append(" ")

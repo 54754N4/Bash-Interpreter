@@ -4,8 +4,8 @@ import interpreters.brace.exception.InvalidBraceExpansionException
 
 interface Visitor {
     fun visit(node: Word): String
-    fun visit(preamble: Atom, expression: RangeExpression, postscript: Atom): String
-    fun visit(preamble: Atom, expression: CSVExpression, postscript: Atom): String
+    fun visit(preamble: AST, expression: CSVExpression, postscript: AST): String
+    fun visit(preamble: AST, expression: RangeExpression, postscript: AST): String
 
     fun visit(ast: AST): String = when (ast) {
         is Word -> this.visit(ast)

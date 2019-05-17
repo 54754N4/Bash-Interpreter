@@ -7,7 +7,7 @@ sealed class AST: Visitable {
 }
 sealed class Expression: AST()
 class RangeExpression(val start: Token, val end: Token, val inc: Token?): Expression()
-class CSVExpression(val atoms: Array<Atom>): Expression()
+class CSVExpression(val atoms: Array<AST>): Expression()
 sealed class Atom: AST()
 class Word(val word: Token): Atom()
-class BraceExpansion(val preamble: Atom, val expression: Expression, val postscript: Atom): Atom()
+class BraceExpansion(val preamble: AST, val expression: Expression, val postscript: AST): Atom()

@@ -9,14 +9,6 @@ fun main() {
     testLexer()
 }
 
-private fun testBrace() {
-    val inputs = listOf("abc{d,e,f,g}hijk", "abc{1..2}asdf32-w=)", "{a..z}", "{A..Z}{0..9}", "{{A..Z},{a..z}}", "{10..01}")
-    for (input in inputs)
-        println("$input expands to :\n${braceExpand(input)}\n")
-}
-
-private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(string))).interpret()
-
 private fun testLexer() {
     val text = listOf(
         "who",
@@ -49,3 +41,13 @@ private fun debug(compound: Compound) {
     for (pipeline in compound.pipelines)
         println(pipeline)
 }
+
+// BRACE EXPANSION TESTS
+
+private fun testBrace() {
+    val inputs = listOf("abc{d,e,f,g}hijk", "abc{1..2}asdf32-w=)", "{a..z}", "{A..Z}{0..9}", "{{A..Z},{a..z}}", "{10..01}", "asdf")
+    for (input in inputs)
+        println("$input expands to :\n${braceExpand(input)}\n")
+}
+
+private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(string))).interpret()

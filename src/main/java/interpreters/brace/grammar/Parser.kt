@@ -19,7 +19,7 @@ class Parser(private val lexer: Lexer) {
     private fun consume(type: Type): Any = (if (currentToken().type == type) current++ else error())
 
     // atom: WORD | brace_expand
-    private fun atom(): Atom {
+    private fun atom(): AST {
         val token = currentToken()
         return if (currentToken().type in arrayOf(Type.WORD, Type.CHAR, Type.NUMBER)) {
                 consume(currentToken().type)
@@ -62,17 +62,20 @@ class Parser(private val lexer: Lexer) {
     }
 
     // brace_expand: WORD? '{' expression '}' WORD?
-    private fun brace_expand(): BraceExpansion {
-        var preamble: Atom = Word(Token(Type.EMPTY))
-        var postscript: Atom = Word(Token(Type.EMPTY))
+    private fun brace_expand(): AST {
+        var preamble: AST = Word(Token(Type.EMPTY))
+        var postscript: AST = Word(Token(Type.EMPTY))
         if (currentToken().type == Type.WORD || currentToken().type == Type.CHAR || currentToken().type == Type.NUMBER)
             preamble = atom()
-        consume(Type.EXPR_START)
-        val expression = expression()
-        consume(Type.EXPR_END)
-        if (currentToken().type == Type.WORD || currentToken().type == Type.CHAR || currentToken().type == Type.NUMBER || currentToken().type == Type.EXPR_START)
-            postscript = atom()
-        return BraceExpansion(preamble, expression, postscript)
+        if (currentToken().type == Type.EXPR_START) {
+            consume(Type.EXPR_START)
+            val expression = expression()
+            consume(Type.EXPR_END)
+            if (currentToken().type == Type.WORD || currentToken().type == Type.CHAR || currentToken().type == Type.NUMBER || currentToken().type == Type.EXPR_START)
+                postscript = atom()
+            return BraceExpansion(preamble, expression, postscript)
+        }
+        return preamble
     }
 
     fun parse(): AST {

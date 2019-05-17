@@ -25,10 +25,6 @@ class Interpreter(private val parser: Parser): Visitor {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun visit(arithmeticSub: ArithmeticSub): Command {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
     override fun visit(processSub: ProcessSub): Command {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
