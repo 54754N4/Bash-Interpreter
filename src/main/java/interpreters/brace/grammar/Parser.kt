@@ -5,7 +5,7 @@ import interpreters.brace.exception.InvalidBraceExpansionException
 
 // brace_expand:    WORD? '{' expression '}' WORD?
 // expression:      [a-z]..[a-z][..[0-9]+] | atom (',' atom)+
-// atom:            brace_expand | WORD
+// atom:            WORD | brace_expand
 
 class Parser(private val lexer: Lexer) {
     private val tokens = lexer.getTokens()
@@ -18,18 +18,14 @@ class Parser(private val lexer: Lexer) {
     private fun currentToken() = tokens[current]
     private fun consume(type: Type): Any = (if (currentToken().type == type) current++ else error())
 
-    // atom: brace_expand | WORD
+    // atom: WORD | brace_expand
     private fun atom(): Atom {
-        val backtrackTo = current
-        return try {
-            brace_expand()
-        } catch (e: InvalidBraceExpansionException) {
-            current = backtrackTo
-            val token = currentToken()
-            if (currentToken().type in arrayOf(Type.WORD, Type.CHAR, Type.NUMBER)) consume(currentToken().type)
-            else error()
-            Word(token)
-        }
+        val token = currentToken()
+        return if (currentToken().type in arrayOf(Type.WORD, Type.CHAR, Type.NUMBER)) {
+                consume(currentToken().type)
+                Word(token)
+            }
+            else brace_expand()
     }
 
     // expression: [a-z] '..' [a-z] ['..' [0-9]+] | atom (',' atom)+
@@ -67,23 +63,15 @@ class Parser(private val lexer: Lexer) {
 
     // brace_expand: WORD? '{' expression '}' WORD?
     private fun brace_expand(): BraceExpansion {
-        var preamble = Token(Type.EMPTY)
-        var postscript = Token(Type.EMPTY)
-        if (currentToken().type == Type.WORD
-            || currentToken().type == Type.CHAR
-            || currentToken().type == Type.NUMBER) {
-            preamble = currentToken()
-            consume(currentToken().type)
-        }
+        var preamble: Atom = Word(Token(Type.EMPTY))
+        var postscript: Atom = Word(Token(Type.EMPTY))
+        if (currentToken().type == Type.WORD || currentToken().type == Type.CHAR || currentToken().type == Type.NUMBER)
+            preamble = atom()
         consume(Type.EXPR_START)
         val expression = expression()
         consume(Type.EXPR_END)
-        if (currentToken().type == Type.WORD
-            || currentToken().type == Type.CHAR
-            || currentToken().type == Type.NUMBER) {
-            postscript = currentToken()
-            consume(currentToken().type)
-        }
+        if (currentToken().type == Type.WORD || currentToken().type == Type.CHAR || currentToken().type == Type.NUMBER || currentToken().type == Type.EXPR_START)
+            postscript = atom()
         return BraceExpansion(preamble, expression, postscript)
     }
 

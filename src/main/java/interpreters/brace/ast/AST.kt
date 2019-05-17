@@ -10,4 +10,4 @@ class RangeExpression(val start: Token, val end: Token, val inc: Token?): Expres
 class CSVExpression(val atoms: Array<Atom>): Expression()
 sealed class Atom: AST()
 class Word(val word: Token): Atom()
-class BraceExpansion(val preamble: Token, val expression: Expression, val postscript: Token): Atom()
+class BraceExpansion(val preamble: Atom, val expression: Expression, val postscript: Atom): Atom()

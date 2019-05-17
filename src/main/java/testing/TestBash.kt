@@ -15,11 +15,14 @@ fun testBrace() {
     val text3 = "{a..z}"
     val text4 = "{A..Z}{0..9}"
     val text5 = "{{A..Z},{a..z}}"
-    val text6 = "{01..10}"
-    val lexer = interpreters.brace.grammar.Lexer(text2)
+    val text6 = "{10..01}"
+    val lexer = interpreters.brace.grammar.Lexer(text)
     println(lexer.getTokens())
-    println(interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(text2))).interpret())
+    println(braceExpand(text6))
 }
+
+private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(string))).interpret()
+
 fun testLexer() {
     val text = listOf(
         "who",

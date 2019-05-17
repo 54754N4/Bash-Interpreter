@@ -8,27 +8,31 @@ class Interpreter(private val parser: Parser): Visitor {
 
     fun interpret() = visit(parser.parse())
 
-    private fun error(): String = throw InvalidBraceExpansionException("Interpreting @ ${parser.errorMessage()}")
+    //private fun error(): String = throw InvalidBraceExpansionException("Interpreting @ ${parser.errorMessage()}")
 
     override fun visit(node: Word): String {
         return node.word.value
     }
 
-    override fun visit(preamble: Token, expression: RangeExpression, postscript: Token): String {
+    override fun visit(preamble: Atom, expression: RangeExpression, postscript: Atom): String {
         val result = StringBuilder()
         val range = generateRange(expression.start, expression.end, expression.inc)
+        val preamble = visit(preamble)
+        val postscript = visit(postscript)
         return if (range != null) {
-            for (c in range)
-                result.append(preamble.value).append(c).append(postscript.value).append(" ")
+            for (p in preamble.split(" "))
+                for (c in range)
+                    for (po in postscript.split(" "))
+                        result.append(p).append(c).append(po).append(" ")
             result.deleteCharAt(result.length-1).toString()
         } else
-            preamble.value + Type.EXPR_START.string + expression.start.value + Type.RANGE.string + expression.end.value + Type.EXPR_END.string + postscript.value
+            preamble + Type.EXPR_START.string + expression.start.value + Type.RANGE.string + expression.end.value + Type.EXPR_END.string + postscript
     }
 
-    override fun visit(preamble: Token, expression: CSVExpression, postscript: Token): String {
+    override fun visit(preamble: Atom, expression: CSVExpression, postscript: Atom): String {
         val result = StringBuilder()
         for (atom in expression.atoms)
-            result.append(preamble.value).append(visit(atom)).append(postscript.value).append(" ")
+            result.append(visit(preamble)).append(visit(atom)).append(visit(postscript)).append(" ")
         return result.deleteCharAt(result.length-1).toString()
     }
 }

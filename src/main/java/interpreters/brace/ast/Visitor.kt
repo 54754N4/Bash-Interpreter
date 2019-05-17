@@ -5,8 +5,9 @@ import interpreters.brace.grammar.Token
 
 interface Visitor {
     fun visit(node: Word): String
-    fun visit(preamble: Token, expression: RangeExpression, postscript: Token): String
-    fun visit(preamble: Token,expression: CSVExpression, postscript: Token): String
+    fun visit(preamble: Atom, expression: RangeExpression, postscript: Atom): String
+    fun visit(preamble: Atom,expression: CSVExpression, postscript: Atom): String
+
     fun visit(ast: AST): String = when (ast) {
         is Word -> this.visit(ast)
         is BraceExpansion -> {
