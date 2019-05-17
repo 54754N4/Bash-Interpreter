@@ -29,7 +29,7 @@ private fun generateIntRange(start: String, end: String, inc: String?): List<Str
     val range = intRange(start.toInt(), end.toInt(), inc?.toInt() ?: 1)
     val max = Math.max(start.length, end.length)
     if (isZeroPadded(start) || isZeroPadded(end))
-        return padZeros(max, range)
+        return range.map { string -> string.padStart(max, '0')}
     return range
 }
 
@@ -37,8 +37,6 @@ private fun intRange(start: Int, end: Int, inc: Int): List<String> {
     return if (start < end) (start .. end step inc).map { it.toString() }
     else (start downTo end step inc).map{ it.toString() }
 }
-
-private fun padZeros(size: Int, range: List<String>): List<String> = range.map { string -> string.padStart(size, '0')}
 
 private fun isZeroPadded(string: String): Boolean {
     if (!isInt(string))
