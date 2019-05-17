@@ -10,10 +10,6 @@ fun main() {
     testCustomInPipe()
 }
 
-fun testBridgeMerge() {
-
-}
-
 fun testCustomIOPipe() {
     val shit = SpitShit()
     shit.launch()
