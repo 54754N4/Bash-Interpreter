@@ -42,11 +42,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="315">
-              <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+            <state relative-caret-position="357">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/io/StreamIO.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="656">
+              <caret line="60" selection-start-line="60" selection-end-line="60" />
             </state>
           </provider>
         </entry>
@@ -149,7 +158,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/bash/command/IOPack.kt" />
         <option value="$PROJECT_DIR$/src/bash/command/CommandContext.kt" />
         <option value="$PROJECT_DIR$/src/testing/TestSynchronization.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestSynchronization.kt" />
@@ -200,6 +208,7 @@
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Interpreter.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Parser.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestBash.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/io/StreamIO.kt" />
       </list>
     </option>
   </component>
@@ -738,13 +747,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/io/StreamIO.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="107">
-          <caret line="8" selection-start-line="8" selection-end-line="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/command/Command.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="756">
@@ -947,8 +949,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="18" column="16" selection-start-line="18" selection-start-column="16" selection-end-line="18" selection-end-column="16" />
+        <state relative-caret-position="357">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/io/StreamIO.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="656">
+          <caret line="60" selection-start-line="60" selection-end-line="60" />
         </state>
       </provider>
     </entry>
