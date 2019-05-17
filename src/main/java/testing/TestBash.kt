@@ -10,15 +10,11 @@ fun main() {
     //testLexer()
 }
 fun testBrace() {
-    val text = "abc{d,e,f,g}hijk"
-    val text2 = "abc{1..2}asdf32-w=)"
-    val text3 = "{a..z}"
-    val text4 = "{A..Z}{0..9}"
-    val text5 = "{{A..Z},{a..z}}"
-    val text6 = "{10..01}"
-    val lexer = interpreters.brace.grammar.Lexer(text)
-    println(lexer.getTokens())
-    println(braceExpand(text6))
+    val inputs = listOf("abc{d,e,f,g}hijk", "abc{1..2}asdf32-w=)", "{a..z}", "{A..Z}{0..9}", "{{A..Z},{a..z}}", "{10..01}")
+    for (input in inputs) {
+        println("$input expands to : ")
+        println("${braceExpand(input)}\n")
+    }
 }
 
 private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(string))).interpret()
