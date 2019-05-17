@@ -19,7 +19,7 @@ class Parser(private val lexer: Lexer) {
     private fun consume(type: Type): Any = (if (currentToken().type == type) current++ else error())
 
     // atom: brace_expand | WORD
-    fun atom(): Atom {
+    private fun atom(): Atom {
         val backtrackTo = current
         return try {
             brace_expand()
@@ -33,7 +33,7 @@ class Parser(private val lexer: Lexer) {
     }
 
     // expression: [a-z] '..' [a-z] ['..' [0-9]+] | atom (',' atom)+
-    fun expression(): Expression {
+    private fun expression(): Expression {
         val backtrackTo = current
         try {
             val start = currentToken()
@@ -66,7 +66,7 @@ class Parser(private val lexer: Lexer) {
     }
 
     // brace_expand: WORD? '{' expression '}' WORD?
-    fun brace_expand(): BraceExpansion {
+    private fun brace_expand(): BraceExpansion {
         var preamble = Token(Type.EMPTY)
         var postscript = Token(Type.EMPTY)
         if (currentToken().type == Type.WORD

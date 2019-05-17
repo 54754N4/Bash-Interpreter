@@ -13,6 +13,9 @@ fun testBrace() {
     val text = "abc{d,e,f,g}hijk"
     val text2 = "abc{1..2}asdf32-w=)"
     val text3 = "{a..z}"
+    val text4 = "{A..Z}{0..9}"
+    val text5 = "{{A..Z},{a..z}}"
+    val text6 = "{01..10}"
     val lexer = interpreters.brace.grammar.Lexer(text2)
     println(lexer.getTokens())
     println(interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(text2))).interpret())
