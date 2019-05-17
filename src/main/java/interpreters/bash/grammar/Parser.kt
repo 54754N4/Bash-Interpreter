@@ -12,11 +12,16 @@ redirection:        NUMBER? ('<'|'<<'|'>'|'>>'|'<>') word
 word:	            COMMAND_SUB | ARITHMETIC_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
  */
 class Parser(private val lexer: Lexer) {
+    companion object {
+        private val WORD_STARTS = arrayOf(Type.COMMAND_SUBSTITUTION, Type.ARITHMETIC_EXPANSION, Type.LEFT_PARENTHESIS, Type.WORD)
+        private val REDIRECTION_OPERATORS = arrayOf(Type.LESS, Type.LESS_LESS, Type.GREATER, Type.GREATER_GREATER, Type.LESS_GREATER)
+        private val PIPELINE_OPERATORS = arrayOf(Type.OR, Type.AND_AND, Type.OR_OR, Type.OR_AND)
+    }
     private var currentToken: Token = lexer.getNextToken()
 
     fun errorMessage() = lexer.errorMessage()
-    private fun error(): Token = throw SyntaxException("Invalid Syntax @ ${lexer.errorMessage()}")
-    private fun errorAST(): AST = throw SyntaxException("Invalid Syntax @ ${lexer.errorMessage()}")
+    private fun error(): Token = throw SyntaxException("Invalid Syntax @ ${errorMessage()}")
+    private fun errorAST(): AST = throw SyntaxException("Invalid Syntax @ ${errorMessage()}")
 
     private fun consume(type: Type) {
         if (currentToken.type == type)
@@ -24,13 +29,6 @@ class Parser(private val lexer: Lexer) {
         else
             error()
     }
-
-    private fun wordStarts():Array<Type> = arrayOf(
-        Type.COMMAND_SUBSTITUTION,
-        Type.ARITHMETIC_EXPANSION,
-        Type.LEFT_PARENTHESIS,
-        Type.WORD
-    )
 
     //word: COMMAND_SUB | ARITHMETIC_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
     private fun word(): AST {
@@ -70,16 +68,6 @@ class Parser(private val lexer: Lexer) {
         }
     }
 
-    private fun redirectionOperators():Array<Type> {
-        return arrayOf(
-            Type.LESS,
-            Type.LESS_LESS,
-            Type.GREATER,
-            Type.GREATER_GREATER,
-            Type.LESS_GREATER
-        )
-    }
-
     //redirection: [NUMBER] ('<'|'<<'|'>'|'>>'|'<>') word
     private fun redirection(): Redirection {
         var number: Token? = null
@@ -89,7 +77,7 @@ class Parser(private val lexer: Lexer) {
             number = currentToken
             consume(Type.NUMBER)
         }
-        return if (currentToken.type in redirectionOperators()) {
+        return if (currentToken.type in REDIRECTION_OPERATORS) {
             op = currentToken
             consume(op.type)
             word = currentToken
@@ -102,25 +90,18 @@ class Parser(private val lexer: Lexer) {
     //simple_command:     word+ redirection*
     private fun simple_command(): AST {
         val args = arrayListOf<AST>()
-        while (currentToken.type in wordStarts())
+        while (currentToken.type in WORD_STARTS)
             args.add(word())
-        val redirections = arrayListOf<Redirection>()
-        while (currentToken.type in redirectionOperators())
-            redirections.add(redirection())
-        return SimpleCommand(args, redirections)
+        val redirects = arrayListOf<Redirection>()
+        while (currentToken.type in REDIRECTION_OPERATORS)
+            redirects.add(redirection())
+        return SimpleCommand(args, redirects)
     }
-
-    private fun pipelineOperators():Array<Type> = arrayOf(
-        Type.OR,
-        Type.AND_AND,
-        Type.OR_OR,
-        Type.OR_AND
-    )
 
     //pipeline: simple_command ('|'|'&&'|'||'|'|&' simple_command)*
     private fun pipeline(): AST {
         var node = simple_command()
-        while (currentToken.type in pipelineOperators()) {
+        while (currentToken.type in PIPELINE_OPERATORS) {
             val token = currentToken
             consume(currentToken.type)
             node = Pipeline(node, token, simple_command())
