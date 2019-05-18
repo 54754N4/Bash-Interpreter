@@ -25,11 +25,12 @@ fun arithmeticExpansion(input: String) = interpreters.calculator.grammar.Interpr
     )
 ).interpret().toString()
 
-fun variableExpansion(input: String): String {
+fun variableExpansion(input: String): String { // TODO fix this shit
     var string = input
     for (variable in variables)
         if (string.contains(variable.key))
             string = string.replace(variable.key, variable.value)
+    // this is bad because if var = Test then myvar = myTest
     return string
 }
 

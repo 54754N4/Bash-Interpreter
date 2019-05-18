@@ -18,7 +18,8 @@ class Interpreter(private val parser: Parser): Visitor {
     }
 
     override fun visit(word: Word): Command {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        println("acting as if i executed ${word.word.value}")
+        TODO("not finished")
     }
 
     override fun visit(commandSub: CommandSub): Command {

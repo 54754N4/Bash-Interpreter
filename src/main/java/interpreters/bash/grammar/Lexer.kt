@@ -154,8 +154,7 @@ class Lexer(private val text: String) {
                 )
                 currentChar.isLetter()
                     || currentChar == '{'
-                    || currentChar == '_'
-                    || currentChar == '-' -> id()
+                    || currentChar == '_' -> id()
                 else -> {
                     when (currentChar) {
                         '"' -> quoted(currentChar)
@@ -210,7 +209,8 @@ class Lexer(private val text: String) {
                                 advance()
                                 Token(Type.TIMEIGN)
                             }
-                            Token(Type.DASH)
+                            if (currentChar.isLetter()) id()
+                            else Token(Type.DASH)
                         }
                         ';' -> {
                             advance()

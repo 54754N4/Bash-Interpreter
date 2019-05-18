@@ -5,12 +5,14 @@ import interpreters.bash.ast.*
 
 /*
 Our grammar production rules are defined as such :
+
+
 compound:           pipeline (';' pipeline)*
-pipeline:           simple_command ('|'|'&&'|'||'|'|&' simple_command)*
+pipeline:           simple_command ('|' | '&&' | '||' | '|&' simple_command)*
 simple_command:     word+ redirection*
-redirection:        NUMBER? ('<'|'<<'|'>'|'>>'|'<>') word
+redirection:        NUMBER? ('<' | '<<' | '>' | '>>' | '<>') word
 word:	            COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
- */
+*/
 class Parser(private val lexer: Lexer) {
     companion object {
         private val WORD_STARTS = arrayOf(Type.COMMAND_SUBSTITUTION, Type.ARITHMETIC_EXPANSION, Type.LEFT_PARENTHESIS, Type.WORD)
