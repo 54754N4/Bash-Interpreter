@@ -1,7 +1,6 @@
 package interpreters.brace.grammar
 
 import interpreters.brace.ast.*
-import interpreters.brace.exception.InvalidBraceExpansionException
 import interpreters.brace.lib.generateRange
 
 class Interpreter(private val parser: Parser): Visitor {

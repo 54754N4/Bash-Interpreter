@@ -3,11 +3,20 @@ package testing
 import command.custom.MyCat
 import command.custom.SpitShit
 import command.NativeCommand
+import interpreters.bash.lib.pipe
 import io.*
 import java.io.File
 
 fun main() {
     testCustomInPipe()
+}
+
+private fun testPipeOperator() {
+    val shit = SpitShit()
+    val cat = MyCat()
+    val piped = shit.pipe( cat pipe cat pipe cat pipe cat)
+    piped.launch()
+    println(piped.output.readAsString())
 }
 
 private fun testCustomIOPipe() {
