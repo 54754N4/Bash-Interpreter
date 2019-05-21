@@ -1,96 +1,124 @@
 package testing
 
+import command.Command
 import command.custom.MyCat
 import command.custom.SpitShit
 import command.NativeCommand
-import interpreters.bash.lib.pipe
 import io.*
-import java.io.File
+import java.nio.file.Paths
 
 fun main() {
-    testCustomInPipe()
+//    testNative()
+//    testCustom()
+//    testInput()
+//    testNativePipe()
+//    testCustomInPipe()
+//    testCustomIOPipe()
+//    testCustomMergedIOPipe()
+//    testPipeOperator()
 }
 
-private fun testPipeOperator() {
-    val shit = SpitShit()
-    val cat = MyCat()
-    val piped = shit.pipe( cat pipe cat pipe cat pipe cat)
-    piped.launch()
-    println(piped.output.readAsString())
+// Command IO tests
+
+private fun testPipeOperator() = println(
+    SpitShit()
+        .pipe( MyCat() pipe MyCat() pipe MyCat() pipe MyCat())
+        .launch()
+        .outputString())
+
+private fun testCustomMergedIOPipe() = println(
+    MyCat().redirIn(
+        MyCat().redirIn(
+            MyCat().redirIn(
+                MyCat().redirIn(
+                    SpitShit().merge().launch().output)
+                    .merge().launch().output)
+                .merge().launch().output)
+            .merge().launch().output)
+        .merge().launch().outputString())
+
+private fun testCustomIOPipe() = println(
+    MyCat().redirIn(
+        MyCat().redirIn(
+            MyCat().redirIn(
+                MyCat().redirIn(
+                    SpitShit().launch().output)
+                .launch().output)
+            .launch().output)
+        .launch().output)
+    .launch().outputString())
+
+private fun testCustomInPipe() = println(
+    MyCat()
+        .redirIn(
+            NativeCommand("dir")
+                .launch()
+                .output)
+        .launch()
+        .outputString())
+
+private fun testNativePipe() = println(
+    NativeCommand("find /I \"test\"")
+        .redirIn(
+            NativeCommand("dir")
+                .launch()
+                .output)
+        .launch()
+        .outputString())
+
+private fun testInput() = println(
+    NativeCommand("sort")
+        .redirIn(Paths.get("test.txt"))
+        .merge()
+        .launch()
+        .outputString())
+
+private fun testCustom() = println(
+    SpitShit()
+        .merge()
+        .launch()
+        .outputString())
+
+private fun testNative() = println(
+    NativeCommand("dir")
+        .merge()
+        .launch()
+        .outputString())
+
+private fun debug(cmd: Command) {
+    print(cmd.command+"\t")
+    print(cmd.input+"\t")
+    print(cmd.output+"\t")
+    println(cmd.error+"\t")
 }
 
-private fun testCustomIOPipe() {
-    val shit = SpitShit()
-    shit.launch()
-    val cat = MyCat(shit.output)
-    cat.launch()
-    val cat1 = MyCat(cat.output)
-    cat1.launch()
-    val cat2 = MyCat(cat1.output)
-    cat2.launch()
-    val cat3 = MyCat(cat2.output)
-    cat3.launch()
-    println("CMD OUTPUT =============")
-    println(cat3.output.readAsString())
-    println("ERROR ==============")
-    println(cat3.error.readAsString())
-}
-
-private fun testInput() {
-    val file = File("test.txt")
-    val dir = NativeCommand("type", file.inputStream()) // i wish windows had cat..
-    dir.merge = true
-    dir.launch()
-    println(dir.output.readAsString())
-}
-
-private fun testCustomInPipe() {
-    val dir = NativeCommand("dir")
-    dir.launch()
-    val cat = MyCat(dir.output)
-    cat.launch()
-    println("CMD OUTPUT =============")
-    println(cat.output.readAsString())
-    println("ERROR ==============")
-    println(cat.error.readAsString())
-}
-
-private fun testPipe() {
-    val dir = NativeCommand("dir /b")
-    dir.launch()
-    val find = NativeCommand("find /I \"test\"", dir.output)
-    find.launch()
-    println("CMD OUTPUT =============")
-    println(find.output.readAsString())
-    println("ERROR ==============")
-    println(find.error.readAsString())
-}
+// Bridge Tests
 
 private fun testBridges() {
-    val file = File("test.txt")
+    val file = Paths.get("test.txt")
     val fOut = file.inputStream()
     val bridge = Bridge()
     val bridge1 = Bridge()
-    fOut.readOutputTo(bridge.pin)
-    bridge.pout.readOutputTo(bridge1.pin)
-    bridge1.pout.readOutputTo(STD.output.outputStream())
+    fOut.writeTo(bridge.pin)
+    bridge.pout.writeTo(bridge1.pin)
+    bridge1.pout.writeTo(STD.output.toFile().outputStream())
     STD.output.printAll()
 }
 
 private fun testBridge1() {
-    val file = File("test.txt")
+    val file = Paths.get("test.txt")
     val fOut = file.inputStream()
     val bridge = Bridge()
-    fOut.readOutputTo(bridge.pin)
-    bridge.pout.readOutputTo(STD.output.outputStream())
+    fOut.writeTo(bridge.pin)
+    bridge.pout.writeTo(STD.output.outputStream())
     STD.output.printAll()
 }
 
 private fun testBridge0() {
-    val file = File("test.txt")
+    val file = Paths.get("test.txt")
     val fOut = file.inputStream()
-    val bridge= Bridge()
-    bridge.pin.writeInputFrom(fOut)
-    STD.output.outputStream().writeInputFrom(bridge.pout)
+    val bridge = Bridge()
+    bridge.pin.readFrom(fOut)
+    STD.output.outputStream().readFrom(bridge.pout)
     STD.output.printAll()
 }

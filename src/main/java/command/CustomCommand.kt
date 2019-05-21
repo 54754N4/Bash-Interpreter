@@ -1,21 +1,15 @@
 package command
 
-import io.mergeWith
-import io.readAsString
-import io.toLines
-import io.writeToPipe
-import java.io.InputStream
+import io.*
+
 // Adapter class makes custom commands threaded and easier to use
-abstract class CustomCommand: Command, Runnable {
+abstract class CustomCommand(command: String): Command(command), Runnable {
     protected lateinit var inputLines: List<String>
     protected lateinit var out: StringBuilder
     protected lateinit var err: StringBuilder
     private lateinit var thread: Thread
 
-    constructor(command: String): super(command)
-    constructor(command: String, input: InputStream?): super(command, input)
-
-    override fun launch() {
+    override fun launch() = apply {
         preExecute()
         thread.start()
         postExecute()
@@ -27,16 +21,17 @@ abstract class CustomCommand: Command, Runnable {
         out = StringBuilder()
         err = StringBuilder()
         thread = Thread(this)
-        inputLines = if (input == null) listOf("") else input.readAsString().toLines()
+        inputLines = inputStream().readAsString().toLines()
         exit = EXIT_SUCCESS
     }
 
     override fun postExecute() {
         if (waitFor)
             thread.join()
-        output = out.writeToPipe()
-        error = err.writeToPipe()
-        if (merge)
-            output = output!!.mergeWith(error!!)
+        if (merge) out.writeToPipe().mergeWith(err.writeToPipe()).writeTo(outputStream())
+        else {
+            out.writeToPipe().writeTo(outputStream())
+            err.writeToPipe().writeTo(errorStream())
+        }
     }
 }

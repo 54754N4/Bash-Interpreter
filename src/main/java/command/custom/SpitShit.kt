@@ -1,11 +1,11 @@
 package command.custom
 
 import command.CustomCommand
+import java.io.File
 import java.io.InputStream
+import java.nio.file.Path
 
-class SpitShit: CustomCommand {
-    constructor(): super("SpitShit")
-    constructor(input: InputStream): super("SpitShit", input)
+class SpitShit: CustomCommand("SpitShit") {
 
     override fun execute() {
         for (i in 0..10) {
