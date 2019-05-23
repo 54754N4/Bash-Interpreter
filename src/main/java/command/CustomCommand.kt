@@ -3,14 +3,17 @@ package command
 import interpreters.args.grammar.Args
 import interpreters.args.grammar.Parser
 import io.*
+import reflection.scanCustoms
+import kotlin.reflect.KClass
+import kotlin.reflect.full.createInstance
 
 // Adapter class makes custom commands threaded and easier to use
 abstract class CustomCommand(val name: String, val args: String = "") : Command("$name $args".trim()), Runnable {
     private lateinit var thread: Thread
     private lateinit var out: StringBuilder
     private lateinit var err: StringBuilder
-    protected lateinit var inputLines: List<String>
     protected lateinit var arguments: Args
+    protected lateinit var inputLines: List<String>
 
     override fun launch() = apply {
         preExecute()
@@ -61,6 +64,27 @@ abstract class CustomCommand(val name: String, val args: String = "") : Command(
     }
 
     companion object {
-        val newLine = System.getProperty("line.separator")  // system dependant new line
+        val newLine = System.getProperty("line.separator")!!  // system dependant new line
+
+        const val customsPackage = "command.custom"
+        private var table: MutableMap<String, KClass<out CustomCommand>> = scanCustoms()
+
+        operator fun get(name: String): CustomCommand? {    // returns null if not found
+            for (e in table)
+                if (e.key.toLowerCase() == name.toLowerCase())
+                    return e.value.createInstance()
+            throw CustomCommandNotFoundException("$name command not found.")
+        }
+
+        private fun debugTable() {
+            for (e in table)
+                println("${e.key}=${e.value}")
+        }
+
+        fun rescanCustoms() {
+            table = scanCustoms()
+        }
+
+        class CustomCommandNotFoundException(string: String): Exception(string)
     }
 }

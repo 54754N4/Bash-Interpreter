@@ -1,7 +1,7 @@
 package testing
 
 import command.CustomCommand
-import reflection.customsPackage
+import command.CustomCommand.Companion.customsPackage
 import org.reflections.scanners.Scanner
 import reflection.retrieveKotlinSubtypes
 import kotlin.reflect.full.createInstance
