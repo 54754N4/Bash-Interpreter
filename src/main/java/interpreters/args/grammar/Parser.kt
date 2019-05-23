@@ -48,7 +48,7 @@ class Parser {      // also our interpreter cause it's so simple
                 }
                 Type.NAMED -> named()
                 Type.UNNAMED -> unnamed()
-                else -> error("Found $currentToken")
+                else -> error("Found $currentToken instead of INPUT|named_param|unnamed_param")
             }
         }
     }
