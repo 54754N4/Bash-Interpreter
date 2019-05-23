@@ -6,10 +6,6 @@ class NativeCommand(command: String): Command(command) {
 
     override fun preExecute() {
         builder.command(*wrapCommand(command)).directory(workingDir.toFile())
-//        builder.redirectInput(Redirect.from(input.toFile()))
-//        builder.redirectOutput(if (appendOut) Redirect.appendTo(output.toFile()) else Redirect.to(output.toFile()))
-//        builder.redirectErrorStream(merge)
-//        if (!merge) builder.redirectError(if (appendErr) Redirect.appendTo(error.toFile()) else Redirect.to(error.toFile()))
     }
 
     override fun execute() {

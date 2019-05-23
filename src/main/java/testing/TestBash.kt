@@ -1,12 +1,13 @@
 package testing
 
+import command.CustomCommand
 import interpreters.bash.ast.Compound
 import interpreters.bash.grammar.Lexer
 import interpreters.bash.grammar.Parser
 import interpreters.bash.grammar.Type
 
 fun main() {
-    testBrace()
+    testLexer()
 }
 
 private fun testLexer() {
@@ -24,7 +25,7 @@ private fun testLexer() {
                 "    echo \"Not OK\"\n" +
                 "fi",
         "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")
-    val str = text[6]
+    val str = text[0]
     val lexer = Lexer(str)
     println(str)
     var token = lexer.getNextToken()

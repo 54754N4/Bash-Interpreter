@@ -12,7 +12,7 @@ fun main() {
 //    testCustom()
 //    testInput()
 //    testNativePipe()
-//    testCustomInPipe()
+    testCustomInPipe()
 //    testCustomIOPipe()
 //    testCustomMergedIOPipe()
 //    testPipeOperator()

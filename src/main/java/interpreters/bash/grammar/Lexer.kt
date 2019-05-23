@@ -140,7 +140,7 @@ class Lexer(private val text: String) {
             advance()
         }
         condition = false
-        return Token(Type.CONDITION_CMD, result.toString())
+        return Token(Type.CONDITION_CMD, result.toString().trim())
     }
 
     fun getNextToken(): Token {

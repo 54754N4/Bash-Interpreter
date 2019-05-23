@@ -9,6 +9,8 @@ abstract class CustomCommand(command: String): Command(command), Runnable {
     protected lateinit var err: StringBuilder
     private lateinit var thread: Thread
 
+    fun getName() = command.split(" ")[0]
+
     override fun launch() = apply {
         preExecute()
         thread.start()

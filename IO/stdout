@@ -7,10 +7,10 @@
 17/05/2019  13:00    <DIR>          ..
 11/05/2019  15:17                66 .gitattributes
 17/05/2019  18:01                35 .gitignore
-22/05/2019  02:19    <DIR>          .idea
+22/05/2019  19:25    <DIR>          .idea
 11/05/2019  15:46             2,381 Bash Interpreter.iml
 12/05/2019  17:19             6,548 bash-grammar.txt
-11/05/2019  15:29    <DIR>          io
+22/05/2019  02:28    <DIR>          io
 11/05/2019  15:38    <DIR>          lib
 11/05/2019  15:52            35,128 LICENSE
 09/05/2019  17:50             2,131 pom.xml
@@ -19,4 +19,5 @@
 11/05/2019  15:29    <DIR>          target
 10/05/2019  21:14               191 test.txt
                8 File(s)         46,499 bytes
-               7 Dir(s)  572,766,433,280 bytes free
+               7 Dir(s)  572,687,609,856 bytes free
+
