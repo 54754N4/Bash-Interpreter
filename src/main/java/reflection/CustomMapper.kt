@@ -1,4 +1,4 @@
-package command.custom
+package reflection
 
 import command.CustomCommand
 

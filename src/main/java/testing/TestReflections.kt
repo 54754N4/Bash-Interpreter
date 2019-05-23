@@ -1,13 +1,21 @@
 package testing
 
 import command.CustomCommand
+import reflection.customsPackage
 import org.reflections.scanners.Scanner
 import reflection.retrieveKotlinSubtypes
+import kotlin.reflect.full.createInstance
 
-fun main() = testReflection()
+fun main() = testCreation()
+
+private fun testCreation() {
+    val customs = retrieveKotlinSubtypes<CustomCommand>(customsPackage, 12)
+    val command = customs.iterator().next()
+    println(command.createInstance().name)
+}
 
 private fun testReflection() {
-    for (`class` in retrieveKotlinSubtypes<CustomCommand>())
+    for (`class` in retrieveKotlinSubtypes<CustomCommand>(customsPackage))
         println(`class`)
 }
 

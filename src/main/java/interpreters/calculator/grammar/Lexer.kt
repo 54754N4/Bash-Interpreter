@@ -3,7 +3,6 @@ package interpreters.calculator.grammar
 import interpreters.calculator.exception.ParsingException
 import kotlin.math.PI
 
-// LEXER CODE
 class Lexer(private val text: String) {
     private var pos: Int = 0
     private var line: Int = 0
