@@ -49,28 +49,52 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/command/CustomCommand.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="84">
-              <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
+            <state relative-caret-position="189">
+              <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+              <folding>
+                <element signature="e#35#103#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Parser.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
+            <state relative-caret-position="-48">
+              <caret line="72" column="23" lean-forward="true" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
+              <folding>
+                <element signature="e#35#116#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/ast/AST.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="805">
+              <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/args/grammar/Parser.kt">
+        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="52">
-              <caret line="50" column="67" lean-forward="true" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+            <state relative-caret-position="430">
+              <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/lib/InterpreterHelper.kt">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="84">
+              <caret line="4" selection-start-line="4" selection-end-line="4" />
             </state>
           </provider>
         </entry>
@@ -114,9 +138,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/calculator/ast/Visitor.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/calculator/grammar/Parser.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/calculator/ast/AST.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/ast/Visitable.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/BraceExpansion.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Type.kt" />
@@ -134,14 +155,11 @@
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/ast/Visitable.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/ast/Visitor.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Interpreter.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt" />
         <option value="$PROJECT_DIR$/src/main/java/io/Files.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestCommandReflectiveIO.kt" />
         <option value="$PROJECT_DIR$/src/main/java/io/StreamIO.kt" />
         <option value="$PROJECT_DIR$/src/main/java/command/Command.kt" />
         <option value="$PROJECT_DIR$/src/main/java/command/NativeCommand.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/ast/AST.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/lib/InterpreterHelper.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestBridges.kt" />
         <option value="$PROJECT_DIR$/pom.xml" />
@@ -163,8 +181,14 @@
         <option value="$PROJECT_DIR$/src/main/java/testing/TestReflections.kt" />
         <option value="$PROJECT_DIR$/src/main/java/reflection/CustomsReflection.kt" />
         <option value="$PROJECT_DIR$/src/main/java/reflection/CustomMapper.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/command/CustomCommand.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/args/grammar/Parser.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/command/CustomCommand.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/ast/AST.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/exception/InvalidVisiteeException.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/exception/InvalidASTException.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/exception/InvalidASTVisiteeException.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt" />
       </list>
     </option>
   </component>
@@ -230,6 +254,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="command" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bash Interpreter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="interpreters" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -239,7 +271,7 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="interpreters" type="462c0819:PsiDirectoryNode" />
-              <item name="args" type="462c0819:PsiDirectoryNode" />
+              <item name="bash" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
@@ -248,8 +280,18 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="interpreters" type="462c0819:PsiDirectoryNode" />
-              <item name="args" type="462c0819:PsiDirectoryNode" />
+              <item name="bash" type="462c0819:PsiDirectoryNode" />
               <item name="grammar" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Bash Interpreter" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="interpreters" type="462c0819:PsiDirectoryNode" />
+              <item name="bash" type="462c0819:PsiDirectoryNode" />
+              <item name="lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="Bash Interpreter" type="b2602c69:ProjectViewProjectNode" />
@@ -280,6 +322,9 @@
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateKotlinClassDialog.RecentsKey">
+      <recent name="interpreters.bash.exception" />
+    </key>
     <key name="MoveKotlinTopLevelDeclarationsDialog.RECENTS_KEY">
       <recent name="interpreters.args.grammar" />
       <recent name="interpreters.bash.ast" />
@@ -498,7 +543,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="kotlin-line">
           <url>file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt</url>
-          <line>146</line>
+          <line>147</line>
           <properties />
           <option name="timeStamp" value="19" />
         </line-breakpoint>
@@ -537,26 +582,6 @@
     <SUITE FILE_PATH="coverage/SimpleInterpreter$bash_command_CommandContextKt.ic" NAME="bash.command.CommandContextKt Coverage Results" MODIFIED="1557426627015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/brace/grammar/Interpreter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="9" column="114" selection-start-line="9" selection-start-column="73" selection-end-line="9" selection-end-column="114" />
-          <folding>
-            <element signature="e#36#111#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Parser.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="468">
-          <caret line="82" column="30" selection-start-line="82" selection-start-column="30" selection-end-line="82" selection-end-column="30" />
-          <folding>
-            <element signature="e#35#116#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestCommandReflectiveIO.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="42">
@@ -713,34 +738,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/lib/InterpreterHelper.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" selection-start-line="4" selection-end-line="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="36" column="51" selection-start-line="36" selection-start-column="51" selection-end-line="36" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="378">
           <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2982">
-          <caret line="142" column="65" selection-start-line="142" selection-start-column="65" selection-end-line="142" selection-end-column="65" />
-          <folding>
-            <element signature="e#35#103#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -814,13 +815,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/ast/AST.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="139">
-          <caret line="11" column="1" selection-start-line="11" selection-start-column="1" selection-end-line="11" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestArgsParser.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -880,13 +874,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/reflection/CustomsReflection.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="398">
@@ -897,13 +884,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/command/CustomCommand.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="4" column="11" selection-start-line="4" selection-start-column="11" selection-end-line="4" selection-end-column="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/args/grammar/Lexer.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1008">
@@ -911,17 +891,82 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="13" column="35" lean-forward="true" selection-start-line="13" selection-start-column="35" selection-end-line="13" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/args/grammar/Parser.kt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="52">
           <caret line="50" column="67" lean-forward="true" selection-start-line="50" selection-start-column="67" selection-end-line="50" selection-end-column="67" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="12" column="24" lean-forward="true" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/command/CustomCommand.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="336">
+          <caret line="19" column="22" lean-forward="true" selection-start-line="19" selection-start-column="22" selection-end-line="19" selection-end-column="22" />
+          <folding>
+            <element signature="e#17#208#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/lib/InterpreterHelper.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="84">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Parser.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-48">
+          <caret line="72" column="23" lean-forward="true" selection-start-line="72" selection-start-column="23" selection-end-line="72" selection-end-column="23" />
+          <folding>
+            <element signature="e#35#116#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="9" column="59" selection-start-line="9" selection-start-column="59" selection-end-line="9" selection-end-column="59" />
+          <folding>
+            <element signature="e#35#103#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/exception/InvalidASTVisiteeException.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="2" column="23" selection-start-line="2" selection-start-column="23" selection-end-line="2" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="42">
+          <caret line="9" column="15" selection-start-line="9" selection-start-column="15" selection-end-line="9" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/ast/AST.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="805">
+          <caret line="47" column="22" selection-start-line="47" selection-start-column="22" selection-end-line="47" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="72" lean-forward="true" selection-start-line="72" selection-end-line="72" />
         </state>
       </provider>
     </entry>

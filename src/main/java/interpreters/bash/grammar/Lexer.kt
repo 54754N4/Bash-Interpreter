@@ -7,6 +7,7 @@ import interpreters.bash.exception.ParsingException
  * Bash does alias/history/arithmetic/brace expansions and recognizes process substitutions during
  * lexing i think based on the docs.
  * Not done : parameter/substring expansions
+ * Check if <(cmd) or >(cmd) works and stuff like read < <(cmd)
  */
 class Lexer(private val text: String) {
     private var condition = false

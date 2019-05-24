@@ -1,6 +1,8 @@
 package interpreters.bash.grammar
 
 import command.Command
+import command.CustomCommand
+import command.NativeCommand
 import command.variables
 import interpreters.bash.ast.*
 import interpreters.bash.exception.InterpretationException
@@ -29,9 +31,9 @@ abstract class Interpreter(private val parser: Parser): Visitor {
         return variables[key]!!
     }
 
-    override fun visit(word: Word): Command {
-        println("acting as if i executed ${word.word.value}")
-        TODO("not finished")
+    override fun visit(word: Word): Command  {
+        return if (word.token.type == Type.WORD) CustomCommand[word.token.value] ?: NativeCommand(word.token.value)
+        else error()
     }
 
 //    override fun visit(redirection: Redirection): Command {
@@ -69,9 +71,10 @@ abstract class Interpreter(private val parser: Parser): Visitor {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
-    override fun visit(compound: Compound): Command {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
+//    override fun visit(compound: Compound): Command {
+//        for (pipeline in compound.pipelines)
+//            visit(pipeline)
+//    }
 
     override fun visit(commandSub: CommandSub): Command {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
