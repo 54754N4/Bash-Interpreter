@@ -33,9 +33,10 @@ interface Visitor {
     fun visit(word: Word): Command
     fun visit(commandSub: CommandSub): Command
     fun visit(processSub: ProcessSub): Command
+    fun visit(command: Command, redirection: Redirection)
     fun visit(simpleCommand: SimpleCommand): Command
     fun visit(pipeline: Pipeline): Command
-    fun visit(compound: Compound): Command
+    fun visit(compound: Compound)
 
     fun visit(ast: AST): Any = when (ast) {
         is Assignment -> this.visit(ast)

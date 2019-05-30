@@ -7,7 +7,9 @@ import reflection.scanCustoms
 import kotlin.reflect.KClass
 import kotlin.reflect.full.createInstance
 
-// Adapter class makes custom commands threaded and easier to use
+/* Adapter class makes custom commands threaded and easier to use
+*  Sad = each cmd uses the same std ios.  (read this : https://www.bottomupcs.com/file_descriptors.xhtml#d0e583)
+ */
 abstract class CustomCommand(val name: String, val args: String = "") : Command("$name $args".trim()), Runnable {
     private lateinit var thread: Thread
     private lateinit var out: StringBuilder

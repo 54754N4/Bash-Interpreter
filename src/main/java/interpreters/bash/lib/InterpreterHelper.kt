@@ -1,4 +1,7 @@
 package interpreters.bash.lib
 
-import command.CustomCommand
+import java.nio.file.Path
 
+//fun redirectionFile(filename: String): Path {
+//
+//}

@@ -7,7 +7,8 @@ import interpreters.bash.grammar.Parser
 import interpreters.bash.grammar.Type
 
 fun main() {
-    testLexer()
+    //testLexer()
+    testBrace()
 }
 
 private fun testLexer() {
