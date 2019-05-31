@@ -73,7 +73,7 @@ class Lexer(private val text: String) {
             advance()
         }
         advance()   // skip right curly brace
-        return Token(Type.WORD, braceExpansion(result.toString()))
+        return Token(Type.WORD, braceExpansion("{$result}"))
     }
 
     private fun expansion(): Token {
