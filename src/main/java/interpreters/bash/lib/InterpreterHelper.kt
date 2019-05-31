@@ -6,10 +6,11 @@ import java.nio.file.Path
 import java.nio.file.Paths
 
 fun main() {
-    println(Paths.get("test").toFile().exists())
+    try { println(getRedirectionFile("test")) }
+    catch (e: FileNotFoundException) { println(e) }
 }
 
-fun redirectionFile(filename: String): Path {
+fun getRedirectionFile(filename: String): Path {
     val path = Paths.get(filename)
     if (!Files.exists(path)) throw FileNotFoundException("$filename doesn't exist")
     return path

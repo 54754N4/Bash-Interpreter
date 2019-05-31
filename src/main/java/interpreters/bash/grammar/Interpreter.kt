@@ -6,7 +6,7 @@ import command.NativeCommand
 import command.variables
 import interpreters.bash.ast.*
 import interpreters.bash.exception.InterpretationException
-import interpreters.bash.lib.redirectionFile
+import interpreters.bash.lib.getRedirectionFile
 
 /*
 Another example of where piping cannot be used:
@@ -39,16 +39,16 @@ abstract class Interpreter(private val parser: Parser): Visitor {
 
     // TODO make it handle custom file descriptors
     override fun visit(command: Command, redirection: Redirection) {
-        val file = redirectionFile(redirection.file.value)
+        val file = getRedirectionFile(redirection.file.value)
         when (redirection.op.type) {
             Type.LESS -> command.redirIn(file)
-            Type.LESS_LESS -> {} //wtf right -- heredocs should be managed in lexer no ?
             Type.GREATER -> command.redirOut(file)
             Type.GREATER_GREATER -> command.redirOut(file).appendOut(true)
             Type.LESS_GREATER -> command.redirIn(file).redirOut(file)
             Type.AND_GREATER,
             Type.GREATER_AND -> command.merge()
             Type.AND_GREATER_GREATER -> command.merge().appendOut(true)
+            //            Type.LESS_LESS -> {} //wtf right -- heredocs should be managed in lexer no ?
             else -> error()
         }
     }

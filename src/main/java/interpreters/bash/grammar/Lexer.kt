@@ -32,9 +32,9 @@ class Lexer(private val text: String) {
 
     private fun skipComment() { while (currentChar != '\n' && !finished) advance() }
 
-    private fun word(): Token {
-        val result = StringBuilder()
-        val valids = arrayOf('_','[',']','.','-','{','}')
+    private fun word(prepend: String): Token {
+        val result = StringBuilder(prepend)
+        val valids = arrayOf('_','[',']','.','-','{','}','=')
         var wait = false
         while (!finished
             && (wait || (currentChar.isLetter() || currentChar.isDigit() || currentChar in valids))) {
@@ -103,7 +103,7 @@ class Lexer(private val text: String) {
                 advance()
                 advance()
             }
-            "}",")"," " -> advance()
+            "}",")" -> advance()
         }
         val string = historyExpansion(result.toString())   // do hist. exp. on cmd. sub. + ari. exp. ?
         return when (stop) {
@@ -124,10 +124,9 @@ class Lexer(private val text: String) {
         return result.toString()
     }
 
-    private fun id(): Token {
-        val token = word()
-        if (reserved.containsKey(token.value))
-            return Token(reserved[token.value]!!, token.value)
+    private fun id(prepend: String): Token {   // instead of making lexer backtrackable, we give it a prepend of preconsumeds
+        val token = word(prepend)
+        if (reserved.containsKey(token.value)) return Token(reserved[token.value]!!, token.value)
         return token
     }
 
@@ -147,7 +146,7 @@ class Lexer(private val text: String) {
         testChar@while (!finished) {
             return when {
                 currentChar.isDigit() -> Token(Type.NUMBER, number())
-                currentChar.isLetter() || currentChar == '_' -> id()
+                currentChar.isLetter() || currentChar == '_' -> id("")
                 else -> {
                     when (currentChar) {
                         '"' -> quoted(currentChar)
@@ -198,12 +197,7 @@ class Lexer(private val text: String) {
                             if (currentChar == 'p' && (pos+1 < text.length && !text[pos+1].isLetter())) {
                                 advance()
                                 Token(Type.TIMEOPT)
-                            } else if (currentChar == '-') {
-                                advance()
-                                Token(Type.TIMEIGN)
-                            }
-                            if (currentChar.isLetter()) id()
-                            else Token(Type.DASH)
+                            } else id("-")
                         }
                         ';' -> {
                             advance()
@@ -241,6 +235,7 @@ class Lexer(private val text: String) {
                                         Token(Type.LESS_LESS_MINUS)
                                     } else
                                         Token(Type.LESS_LESS)  // TODO change lexer state to take in a Here-Document
+                                    //https://catonmat.net/bash-one-liners-explained-part-three  #6
                                 }
                                 '&' -> {
                                     advance()
