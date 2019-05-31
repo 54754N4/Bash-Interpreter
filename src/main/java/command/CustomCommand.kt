@@ -30,7 +30,7 @@ abstract class CustomCommand(val name: String, val args: String = "") : Command(
         err = StringBuilder()
         thread = Thread(this)
         inputLines = inputStream().readAsString().toLines()
-        arguments = Parser().parse(args)
+        arguments = Parser(args).parse()
         exit = EXIT_SUCCESS
     }
 

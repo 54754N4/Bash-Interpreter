@@ -8,13 +8,13 @@ import interpreters.args.exception.InvalidParsingException
  *  named_param:    NAMED WORD [ EQUALS WORD ]
  *  unnamed_param:  UNNAMED WORD
  */
-class Parser {      // also our interpreter cause it's so simple
+class Parser(val input: String) {      // also our interpreter cause it's so simple
+    private val dictionary = mutableMapOf<String, String>()
+    private val inputs = mutableListOf<String>()
     private var current = 0
     private var finished = false
-    private lateinit var currentToken: Token
-    private lateinit var lexer: Lexer
-    private lateinit var dictionary: MutableMap<String, String>
-    private lateinit var inputs: MutableList<String>
+    private var lexer = Lexer(input)
+    private var currentToken = lexer.tokens[current]
 
     private fun advance() = try { currentToken = lexer.tokens[++current] } catch (e: IndexOutOfBoundsException) { finished = true }
 
@@ -53,17 +53,7 @@ class Parser {      // also our interpreter cause it's so simple
         }
     }
 
-    private fun lateInit(input: String) {
-        lexer = Lexer(input)
-        dictionary = mutableMapOf()
-        inputs = mutableListOf()
-        current = 0
-        finished = false
-        currentToken = lexer.tokens[current]
-    }
-
-    fun parse(input: String): Args {
-        lateInit(input)
+    fun parse(): Args {
         start()
         return Args(inputs.joinToString(" "), dictionary)
     }

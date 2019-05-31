@@ -52,4 +52,4 @@ private fun testBrace() {
         println("$input expands to :\n${braceExpand(input)}\n")
 }
 
-private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(interpreters.brace.grammar.Parser(interpreters.brace.grammar.Lexer(string))).interpret()
+private fun braceExpand(string: String) = interpreters.brace.grammar.Interpreter(string).interpret()

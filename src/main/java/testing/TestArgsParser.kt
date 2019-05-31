@@ -24,10 +24,9 @@ fun testArgsCommand() = println(Test("--dump --key=valye --a0=\"i - am a big -- 
 
 fun testArgsParsing() {
     val input = " -n --named_no_value --named=\"with value\" and extra input"
-    val parser = Parser()
-    parser.parse(input)
-    parser.parse(input)
-    println(parser.parse(input))
+    var parser = Parser(input)
+    parser = Parser(input)
+    println(parser.parse())
 }
 
 fun testStupidPrime(num: Long): Boolean {
