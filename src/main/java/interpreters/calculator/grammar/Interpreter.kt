@@ -8,7 +8,8 @@ import interpreters.calculator.ast.UnaryOperator
 import interpreters.calculator.exception.InterpretationException
 import kotlin.math.*
 
-class Interpreter(private val parser: Parser): Visitor {
+class Interpreter(val input: String): Visitor {
+    private val parser = Parser(Lexer(input))
 
     fun interpret() = visit(parser.parse())
 

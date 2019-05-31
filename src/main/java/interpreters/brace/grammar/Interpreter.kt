@@ -3,9 +3,9 @@ package interpreters.brace.grammar
 import interpreters.brace.ast.*
 import interpreters.brace.lib.generateRange
 
-class Interpreter(private val parser: Parser): Visitor {
+class Interpreter(val input: String): Visitor {
 
-    fun interpret() = visit(parser.parse())
+    fun interpret() = visit(Parser(Lexer(input)).parse())
 
     //private fun error(): String = throw InvalidBraceExpansionException("Interpreting @ ${parser.errorMessage()}")
 

@@ -13,17 +13,9 @@ val variables = hashMapOf("var" to "I love you baby")
 var historyExpand = true
 val history = arrayListOf<String>()
 
-fun braceExpansion(input: String) = interpreters.brace.grammar.Interpreter(
-    interpreters.brace.grammar.Parser(
-        interpreters.brace.grammar.Lexer(input)
-    )
-).interpret()
+fun braceExpansion(input: String) = interpreters.brace.grammar.Interpreter(input).interpret()
 
-fun arithmeticExpansion(input: String) = interpreters.calculator.grammar.Interpreter(
-    interpreters.calculator.grammar.Parser(
-        interpreters.calculator.grammar.Lexer(input)
-    )
-).interpret().toString()
+fun arithmeticExpansion(input: String) = interpreters.calculator.grammar.Interpreter(input).interpret().toString()
 
 fun historyExpansion(input: String): String {
     if (!historyExpand)
