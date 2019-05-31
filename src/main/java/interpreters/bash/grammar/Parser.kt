@@ -85,15 +85,16 @@ class Parser(private val lexer: Lexer) {
             errorAST() as Redirection
     }
 
-    //simple_command:     word+ redirection*
+    //simple_command:     word word* redirection*
     private fun simple_command(): AST {
+        val word = word()
         val args = arrayListOf<AST>()
         while (currentToken.type in WORD_STARTS)
             args.add(word())
         val redirects = arrayListOf<Redirection>()
         while (currentToken.type in REDIRECTION_OPERATORS)
             redirects.add(redirection())
-        return SimpleCommand(args, redirects)
+        return SimpleCommand(word, args, redirects)
     }
 
     //pipeline: simple_command ('|'|'&&'|'||'|'|&' simple_command)*

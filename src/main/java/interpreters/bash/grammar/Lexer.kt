@@ -6,7 +6,7 @@ import interpreters.bash.exception.ParsingException
 /**
  * Bash does alias/history/arithmetic/brace expansions and recognizes process substitutions during
  * lexing i think based on the docs.
- * Not done : parameter/substring expansions
+ * Not done : parameter/substring expansions + here-documents
  * Check if <(cmd) or >(cmd) works and stuff like read < <(cmd)
  */
 class Lexer(private val text: String) {
@@ -23,17 +23,14 @@ class Lexer(private val text: String) {
         catch (e: IndexOutOfBoundsException) { finished = true }  // "gracefully" finish parsing
     }
 
-    private fun peek(string: String):Boolean = text.substring(pos).startsWith(string)
+    private fun peek(string: String) = text.substring(pos).startsWith(string)
 
     private fun unescaped() = when (pos) {
         0 -> true
         else -> text[pos-1] != '\\'
     }
 
-    private fun skipComment() {
-        while (currentChar != '\n' && !finished)
-            advance()
-    }
+    private fun skipComment() { while (currentChar != '\n' && !finished) advance() }
 
     private fun word(): Token {
         val result = StringBuilder()
@@ -149,13 +146,8 @@ class Lexer(private val text: String) {
             return conditionCommand()
         testChar@while (!finished) {
             return when {
-                currentChar.isDigit() -> Token(
-                    Type.NUMBER,
-                    number()
-                )
-                currentChar.isLetter()
-                    || currentChar == '{'
-                    || currentChar == '_' -> id()
+                currentChar.isDigit() -> Token(Type.NUMBER, number())
+                currentChar.isLetter() || currentChar == '_' -> id()
                 else -> {
                     when (currentChar) {
                         '"' -> quoted(currentChar)
@@ -248,7 +240,7 @@ class Lexer(private val text: String) {
                                         advance()
                                         Token(Type.LESS_LESS_MINUS)
                                     } else
-                                        Token(Type.LESS_LESS)
+                                        Token(Type.LESS_LESS)  // TODO change lexer state to take in a Here-Document
                                 }
                                 '&' -> {
                                     advance()

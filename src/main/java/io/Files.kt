@@ -21,14 +21,10 @@ class STD {
         var root = Paths.get(".")
 
         init {
-            if (!Files.exists(input))
-                input = Files.createFile(input)
-            if (!Files.exists(output))
-                output = Files.createFile(output)
-            if (!Files.exists(error))
-                error = Files.createFile(error)
-            if (!Files.exists(root))
-                root = Files.createFile(root)
+            if (!Files.exists(input)) input = Files.createFile(input)
+            if (!Files.exists(output)) output = Files.createFile(output)
+            if (!Files.exists(error)) error = Files.createFile(error)
+            if (!Files.exists(root)) root = Files.createFile(root)
         }
     }
 }
@@ -36,7 +32,7 @@ class STD {
 class FDManager {
     companion object {
         private const val FD_PATH_FORMAT = "io/fd%d"
-        private const val FD_MAX = 10
+        private const val FD_MAX = 100
         val fds = mutableMapOf<Int, Path>()
 
         init {

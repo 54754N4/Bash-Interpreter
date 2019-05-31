@@ -6,6 +6,7 @@ import command.NativeCommand
 import command.variables
 import interpreters.bash.ast.*
 import interpreters.bash.exception.InterpretationException
+import interpreters.bash.lib.redirectionFile
 
 /*
 Another example of where piping cannot be used:
@@ -15,65 +16,61 @@ Another example of where piping cannot be used:
         read < <(echo 'foo'); echo ${REPLY}
  correctly returns foo, because there is no sub-shell.
  */
-//
-//abstract class Interpreter(private val parser: Parser): Visitor {
-//
-//    fun interpret() = visit(parser.parse())
-//
-//    private fun error(): Command = throw InterpretationException("Interpreting @ ${parser.errorMessage()}")
-//
-//    override fun visit(assignment: Assignment): String {
-//        val key = assignment.key.value
-//        val value = StringBuilder()
-//        for (word in assignment.value)
-//            value.append(word.value+" ")
-//        variables[key] = value.toString().trim()
-//        return variables[key]!!
-//    }
-//
-//    override fun visit(word: Word): Command  {
-//        return if (word.token.type == Type.WORD) CustomCommand[word.token.value] ?: NativeCommand(word.token.value)
-//        else error()
-//    }
-//
-//    override fun visit(command: Command, redirection: Redirection) {
-//        return when (redirection.op.type) {
-//            Type.LESS -> command.redirIn()
-//            Type.LESS_LESS -> {
-//
-//            }
-//            Type.GREATER -> {
-//
-//            }
-//            Type.GREATER_GREATER -> {
-//
-//            }
-//            Type.LESS_GREATER -> {
-//
-//            }
-//            else -> error
-//        }
-//
-//    }
-//
-//    override fun visit(simpleCommand: SimpleCommand): Command {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun visit(pipeline: Pipeline): Command {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun visit(compound: Compound) {
-//        for (pipeline in compound.pipelines)
-//            visit(pipeline)
-//    }
-//
-//    override fun visit(commandSub: CommandSub): Command {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//
-//    override fun visit(processSub: ProcessSub): Command {
-//        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-//    }
-//}
+
+abstract class Interpreter(private val parser: Parser): Visitor {
+
+    fun interpret() = visit(parser.parse())
+
+    private fun error(): Command = throw InterpretationException("Interpreting @ ${parser.errorMessage()}")
+
+    override fun visit(assignment: Assignment): String {
+        val key = assignment.key.value
+        val value = StringBuilder()
+        for (word in assignment.value)
+            value.append(word.value+" ")
+        variables[key] = value.toString().trim()
+        return variables[key]!!
+    }
+
+    override fun visit(word: Word): Command  {
+        return if (word.token.type == Type.WORD) CustomCommand[word.token.value] ?: NativeCommand(word.token.value)
+        else error()
+    }
+
+    // TODO make it handle custom file descriptors
+    override fun visit(command: Command, redirection: Redirection) {
+        val file = redirectionFile(redirection.file.value)
+        when (redirection.op.type) {
+            Type.LESS -> command.redirIn(file)
+            Type.LESS_LESS -> {} //wtf right -- heredocs should be managed in lexer no ?
+            Type.GREATER -> command.redirOut(file)
+            Type.GREATER_GREATER -> command.redirOut(file).appendOut(true)
+            Type.LESS_GREATER -> command.redirIn(file).redirOut(file)
+            Type.AND_GREATER,
+            Type.GREATER_AND -> command.merge()
+            Type.AND_GREATER_GREATER -> command.merge().appendOut(true)
+            else -> error()
+        }
+    }
+
+    override fun visit(simpleCommand: SimpleCommand): Command {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun visit(pipeline: Pipeline): Command {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun visit(compound: Compound) {
+        for (pipeline in compound.pipelines)
+            visit(pipeline)
+    }
+
+    override fun visit(commandSub: CommandSub): Command {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun visit(processSub: ProcessSub): Command {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+}
