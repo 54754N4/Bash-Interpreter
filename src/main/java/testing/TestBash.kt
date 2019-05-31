@@ -25,7 +25,7 @@ private fun testLexer() {
                 "else\n" +
                 "    echo \"Not OK\"\n" +
                 "fi",
-        "echo \$myvar \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")   // 7
+        "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")   // 7
     val str = text[7]
     val lexer = Lexer(str)
     println(str)

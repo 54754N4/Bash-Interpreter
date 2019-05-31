@@ -107,7 +107,7 @@ class Lexer(private val text: String) {
         }
         val string = historyExpansion(result.toString())   // do hist. exp. on cmd. sub. + ari. exp. ?
         return when (stop) {
-            " " -> Token(Type.WORD, variableExpansion(result.toString()))
+            " " -> Token(Type.WORD, variables[result.toString()] ?: result.toString())
             ")" -> Token(Type.PROCESS_SUBSTITUTION, result.toString())
             "}" -> Token(Type.COMMAND_SUBSTITUTION, string)
             "}}" -> Token(Type.WORD, arithmeticExpansion(string))

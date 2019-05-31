@@ -30,11 +30,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="37">
-              <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
+            <state relative-caret-position="121">
+              <caret line="109" column="85" selection-start-line="109" selection-start-column="85" selection-end-line="109" selection-end-column="85" />
               <folding>
                 <element signature="e#35#103#0" expanded="true" />
               </folding>
@@ -45,8 +45,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="168">
-              <caret line="34" selection-start-line="34" selection-end-line="34" />
+            <state relative-caret-position="21">
+              <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -60,11 +60,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+            <state relative-caret-position="121">
+              <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -211,8 +211,8 @@
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Interpreter.kt" />
         <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/lib/InterpreterHelper.kt" />
         <option value="$PROJECT_DIR$/src/main/java/testing/TestBash.kt" />
-        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt" />
         <option value="$PROJECT_DIR$/src/main/java/command/CommandContext.kt" />
+        <option value="$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt" />
       </list>
     </option>
   </component>
@@ -521,8 +521,8 @@
       <window_info id="Favorites" order="7" sideWeight="0.500998" side_tool="true" weight="0.20319635" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" sideWeight="0.49619484" weight="0.32918397" />
-      <window_info anchor="bottom" x="368" y="333" width="1001" height="238" id="Run" order="2" sideWeight="0.4732143" weight="0.48962656" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" sideWeight="0.4977169" visible="true" weight="0.604426" />
+      <window_info active="true" anchor="bottom" x="368" y="333" width="1001" height="238" id="Run" order="2" sideWeight="0.4732143" visible="true" weight="0.48962656" />
+      <window_info anchor="bottom" id="Debug" order="3" sideWeight="0.4977169" weight="0.604426" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" weight="0.3297587" />
@@ -996,25 +996,25 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/testing/TestBash.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="168">
-          <caret line="34" selection-start-line="34" selection-end-line="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="37">
-          <caret line="105" column="19" selection-start-line="105" selection-start-column="19" selection-end-line="105" selection-end-column="19" />
-          <folding>
-            <element signature="e#35#103#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="21">
+          <caret line="27" column="16" selection-start-line="27" selection-start-column="16" selection-end-line="27" selection-end-column="16" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/command/CommandContext.kt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="28" column="54" selection-start-line="28" selection-start-column="54" selection-end-line="28" selection-end-column="54" />
+        <state relative-caret-position="121">
+          <caret line="25" column="24" selection-start-line="25" selection-start-column="24" selection-end-line="25" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/interpreters/bash/grammar/Lexer.kt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="121">
+          <caret line="109" column="85" selection-start-line="109" selection-start-column="85" selection-end-line="109" selection-end-column="85" />
+          <folding>
+            <element signature="e#35#103#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

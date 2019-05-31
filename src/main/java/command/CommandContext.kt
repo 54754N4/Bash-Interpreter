@@ -25,11 +25,6 @@ fun arithmeticExpansion(input: String) = interpreters.calculator.grammar.Interpr
     )
 ).interpret().toString()
 
-fun variableExpansion(input: String) = when {
-    variables.containsKey(input) -> variables[input]!!
-    else -> input
-}
-
 fun historyExpansion(input: String): String {
     if (!historyExpand)
         return input
