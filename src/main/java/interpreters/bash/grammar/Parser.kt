@@ -9,7 +9,7 @@ Our grammar production rules are defined as such :
 
 compound:           pipeline (';' pipeline)*
 pipeline:           simple_command ('|' | '&&' | '||' | '|&' simple_command)*
-simple_command:     word+ redirection*
+simple_command:     word word* redirection*
 redirection:        NUMBER? ('<' | '<<' | '>' | '>>' | '<>') word
 word:	            COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
 */
@@ -26,10 +26,8 @@ class Parser(private val lexer: Lexer) {
     private fun errorAST(): AST = throw SyntaxException("Invalid Syntax @ ${errorMessage()}")
 
     private fun consume(type: Type) {
-        if (currentToken.type == type)
-            currentToken = lexer.getNextToken()
-        else
-            error()
+        if (currentToken.type == type) currentToken = lexer.getNextToken()
+        else error()
     }
 
     //word: COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
@@ -118,7 +116,5 @@ class Parser(private val lexer: Lexer) {
         return Compound(compound)
     }
 
-    fun parse(): Compound {
-        return compound()
-    }
+    fun parse() = compound()
 }
