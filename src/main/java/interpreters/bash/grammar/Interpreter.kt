@@ -6,7 +6,9 @@ import command.NativeCommand
 import command.variables
 import interpreters.bash.ast.*
 import interpreters.bash.exception.InterpretationException
+import interpreters.bash.exception.InvalidCommandException
 import interpreters.bash.lib.getRedirectionFile
+import io.STD
 
 /*
 Another example of where piping cannot be used:
@@ -17,7 +19,7 @@ Another example of where piping cannot be used:
  correctly returns foo, because there is no sub-shell.
  */
 
-abstract class Interpreter(private val parser: Parser): Visitor {
+class Interpreter(private val parser: Parser): Visitor {
 
     fun interpret() = visit(parser.parse())
 
@@ -54,7 +56,16 @@ abstract class Interpreter(private val parser: Parser): Visitor {
     }
 
     override fun visit(simpleCommand: SimpleCommand): Command {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        var command = visit(simpleCommand.word)
+        when (command) {
+            !is Command -> throw InvalidCommandException("${simpleCommand.word}")
+            else -> {
+                for (word in simpleCommand.args){
+
+                }
+            }
+        }
+        return command
     }
 
     override fun visit(pipeline: Pipeline): Command {
@@ -67,7 +78,8 @@ abstract class Interpreter(private val parser: Parser): Visitor {
     }
 
     override fun visit(commandSub: CommandSub): Command {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        val interpeted = Interpreter(Parser(Lexer(commandSub.command.value))).interpret()
+        STD.output
     }
 
     override fun visit(processSub: ProcessSub): Command {

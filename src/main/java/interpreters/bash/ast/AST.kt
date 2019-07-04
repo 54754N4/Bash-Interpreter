@@ -24,9 +24,9 @@ data class Compound(val pipelines: ArrayList<AST>): AST()
 /*
 compound:           pipeline (';' pipeline)*
 pipeline:           simple_command ('|' | '&&' | '||' | '|&' simple_command)*
-simple_command:     word+ redirection*
+simple_command:     WORD word_token* redirection*
 redirection:        NUMBER? ('<' | '<<' | '>' | '>>' | '<>') word
-word:	            COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
+word_token:	        COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word_token*]
 */
 interface Visitor {
     fun visit(assignment: Assignment): String
@@ -34,7 +34,7 @@ interface Visitor {
     fun visit(commandSub: CommandSub): Command
     fun visit(processSub: ProcessSub): Command
     fun visit(command: Command, redirection: Redirection)
-    fun visit(simpleCommand: SimpleCommand): Command
+    fun visit(simpleCommand: SimpleCommand): Command        // TODO CHECK THIS MOFO OUT
     fun visit(pipeline: Pipeline): Command
     fun visit(compound: Compound)
 

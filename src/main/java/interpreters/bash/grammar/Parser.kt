@@ -9,9 +9,9 @@ Our grammar production rules are defined as such :
 
 compound:           pipeline (';' pipeline)*
 pipeline:           simple_command ('|' | '&&' | '||' | '|&' simple_command)*
-simple_command:     word word* redirection*
+simple_command:     WORD word_token* redirection*
 redirection:        NUMBER? ('<' | '<<' | '>' | '>>' | '<>') word
-word:	            COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
+word_token:	        COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word_token*]
 */
 class Parser(private val lexer: Lexer) {
     companion object {
@@ -30,8 +30,8 @@ class Parser(private val lexer: Lexer) {
         else error()
     }
 
-    //word: COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word*]
-    private fun word(): AST {
+    //word_token:	        COMMAND_SUB | PROCESS_SUB | '(' compound ')' | WORD ['=' word_token*]
+    private fun word_token(): AST {
         val token = currentToken
         return when (token.type) {
             Type.COMMAND_SUBSTITUTION -> {
@@ -83,12 +83,12 @@ class Parser(private val lexer: Lexer) {
             errorAST() as Redirection
     }
 
-    //simple_command:     word word* redirection*
+    //simple_command:     WORD word_token* redirection*
     private fun simple_command(): AST {
-        val word = word()
+        val word = word_token()
         val args = arrayListOf<AST>()
         while (currentToken.type in WORD_STARTS)
-            args.add(word())
+            args.add(word_token())
         val redirects = arrayListOf<Redirection>()
         while (currentToken.type in REDIRECTION_OPERATORS)
             redirects.add(redirection())

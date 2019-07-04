@@ -24,8 +24,7 @@ fun testArgsCommand() = println(Test("--dump --key=valye --a0=\"i - am a big -- 
 
 fun testArgsParsing() {
     val input = " -n --named_no_value --named=\"with value\" and extra input"
-    var parser = Parser(input)
-    parser = Parser(input)
+    val parser = Parser(input)
     println(parser.parse())
 }
 

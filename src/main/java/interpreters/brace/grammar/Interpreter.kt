@@ -13,11 +13,11 @@ class Interpreter(val input: String): Visitor {
         return node.word.value
     }
 
-    override fun visit(preamble: AST, expression: RangeExpression, postscript: AST): String {
+    override fun visit(pre: AST, expression: RangeExpression, post: AST): String {
         val result = StringBuilder()
         val range = generateRange(expression.start, expression.end, expression.inc)
-        val preamble = visit(preamble)
-        val postscript = visit(postscript)
+        val preamble = visit(pre)
+        val postscript = visit(post)
         return if (range != null) {
             for (p in preamble.split(" "))
                 for (c in range)

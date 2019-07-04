@@ -8,7 +8,7 @@ import interpreters.bash.grammar.Type
 
 fun main() {
     testLexer()
-//    testBrace()
+    //testBrace()
 }
 
 private fun testLexer() {
@@ -25,8 +25,8 @@ private fun testLexer() {
                 "else\n" +
                 "    echo \"Not OK\"\n" +
                 "fi",
-        "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")   // 7
-    val str = text[6]
+        "echo \$var \${ls -l} \${{1+2*exp(1)}}  {a,v,b} < somewhere; other --param > output < input")  // 7
+    val str = text[7]
     val lexer = Lexer(str)
     println(str)
     var token = lexer.getNextToken()

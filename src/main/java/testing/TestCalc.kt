@@ -11,5 +11,5 @@ fun main() {
     }
 }
 
-private fun calculate(input: String): Double = Interpreter(Parser(Lexer(input))).interpret()
+private fun calculate(input: String): Double = Interpreter(input).interpret()
 
