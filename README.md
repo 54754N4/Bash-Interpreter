@@ -1,9 +1,12 @@
-# Bash Interpreter
-
+# Bash 
 bash_grammar.txt : has grammar extracted from yacc file used by Bash itself, just for reference
 
-Includes 4 interpreters for now :
-- for parsing arguments
-- for brace expansions
-- for an extended bash arithmetic expression parsing
-- and finally, the bash language interpreter itself (not-finished)
+# Interpreters
+For parsing :
+- arguments
+- brace expansions
+- an extended bash arithmetic
+- the bash language interpreter itself (not-finished)
+
+# Supports native and custom commands.
+For now only pipes and redirections
