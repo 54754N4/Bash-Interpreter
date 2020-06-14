@@ -10,3 +10,9 @@ For parsing :
 
 # Supports native and custom commands.
 For now only pipes and redirections
+
+# Note
+The `XFC-Bash-Interpreter` java repository has the same goal but has more features implemented, including:
+- an improved brace expansion parser
+- support for parameter and variable expansion
+- more frequent updates
