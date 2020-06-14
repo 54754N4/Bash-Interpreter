@@ -15,4 +15,5 @@ For now only pipes and redirections
 The `XFC-Bash-Interpreter` java repository has the same goal but has more features implemented, including:
 - an improved brace expansion parser
 - support for parameter and variable expansion
+- in-memory native and custom command IO, without using intermediary files
 - more frequent updates
